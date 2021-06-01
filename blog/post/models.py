@@ -6,3 +6,6 @@ class Post(models.Model):
     body = models.TextField(max_length=1000)
     published_on = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
