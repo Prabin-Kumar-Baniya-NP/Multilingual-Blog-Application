@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./styles.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="./bootstrap-icons/font/bootstrap-icons.css">
+  <title>Your Name Here</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand ms-sm-2 ms-md-3 ms-lg-4" href="#">Your Name Here</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ms-auto">
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+                <span class="nav-icons"><i class="bi bi-person-square"></i></span> <span
+                  class="nav-link-value"> Portfolio</span>
+              </a>
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./blog.html">
+                <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
+                  class="nav-link-value"> Blogs</span>
+              </a>
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./contact-me.html">
+                <span class="nav-icons"><i class="bi bi-telephone-fill"></i></span> <span
+                  class="nav-link-value"> Contact Me</span>
+              </a>
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./login.html">
+                <span class="nav-icons"><i class="bi bi-box-arrow-in-right"></i></span> <span
+                    class="nav-link-value"> Sign Up / Login </span>
+            </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Confirmation For Deletion</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Are you sure you want to delete this post
+            </div>
+            <div class="modal-footer">
+              <a href="#" class="btn btn-dark" data-bs-dismiss="modal">Cancel</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="container mt-3 fs-5">
+        <div class="manage-blog-container mt-3 mb-3 p-3">
+            <div class="blog-type-title fs-4 ms-2 text-center">
+                Choose Any Post To Update or Delete
+            </div>
+            <div class="blog-collections">
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-body">
+                        <div class="header row">
+                            <div class="card-title fw-bold fs-5 col-12 col-md-auto">Lorem Ipsum Dolor Sit Amet Animi vel
+                                neque fugit ab.</div>
+                            <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">Last Updated 3 mins ago</small>
+                        </div>
+                        <div class="card-text post-body">Lorem Ipsum Dolor Sit Amet, animi vel neque fugit ab, ut ullam
+                            totam. Culpa
+                            perferendis error cumque itaque libero temporibus, aut neque ut quisquamau...</div>
+                        <div class="card-text d-flex justify-content-between">
+                            <div class="post-votes mt-1">
+                                <a href="#" class="vote-link"><span class="icon pt-1 upvote"><object
+                                            data="./icons/upvote.svg"> </object>12</span></a>
+                                <a href="#" class="vote-link"><span class="icon pt-1 downvote"><object
+                                            data="./icons/downvote.svg"> </object>5</span></a>
+                            </div>
+                            <div class="manage-post mt-1">
+                                <a href="./update-post.html" class="btn btn-warning">Update</a>
+                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-body">
+                        <div class="header row">
+                            <div class="card-title fw-bold fs-5 col-12 col-md-auto">Lorem Ipsum Dolor Sit Amet Animi vel
+                                neque fugit ab.</div>
+                            <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">Last Updated 3 mins ago</small>
+                        </div>
+                        <div class="card-text post-body">Lorem Ipsum Dolor Sit Amet, animi vel neque fugit ab, ut ullam
+                            totam. Culpa
+                            perferendis error cumque itaque libero temporibus, aut neque ut quisquamau...</div>
+                        <div class="card-text d-flex justify-content-between">
+                            <div class="post-votes mt-1">
+                                <a href="#" class="vote-link"><span class="icon pt-1 upvote"><object
+                                            data="./icons/upvote.svg"> </object>12</span></a>
+                                <a href="#" class="vote-link"><span class="icon pt-1 downvote"><object
+                                            data="./icons/downvote.svg"> </object>5</span></a>
+                            </div>
+                            <div class="manage-post mt-1">
+                                <a href="./update-post.html" class="btn btn-warning">Update</a>
+                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-body">
+                        <div class="header row">
+                            <div class="card-title fw-bold fs-5 col-12 col-md-auto">Lorem Ipsum Dolor Sit Amet Animi vel
+                                neque fugit ab.</div>
+                            <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">Last Updated 3 mins ago</small>
+                        </div>
+                        <div class="card-text post-body">Lorem Ipsum Dolor Sit Amet, animi vel neque fugit ab, ut ullam
+                            totam. Culpa
+                            perferendis error cumque itaque libero temporibus, aut neque ut quisquamau...</div>
+                        <div class="card-text d-flex justify-content-between">
+                            <div class="post-votes mt-1">
+                                <a href="#" class="vote-link"><span class="icon pt-1 upvote"><object
+                                            data="./icons/upvote.svg"> </object>12</span></a>
+                                <a href="#" class="vote-link"><span class="icon pt-1 downvote"><object
+                                            data="./icons/downvote.svg"> </object>5</span></a>
+                            </div>
+                            <div class="manage-post mt-1">
+                                <a href="./update-post.html" class="btn btn-warning">Update</a>
+                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-body">
+                        <div class="header row">
+                            <div class="card-title fw-bold fs-5 col-12 col-md-auto">Lorem Ipsum Dolor Sit Amet Animi vel
+                                neque fugit ab.</div>
+                            <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">Last Updated 3 mins ago</small>
+                        </div>
+                        <div class="card-text post-body">Lorem Ipsum Dolor Sit Amet, animi vel neque fugit ab, ut ullam
+                            totam. Culpa
+                            perferendis error cumque itaque libero temporibus, aut neque ut quisquamau...</div>
+                        <div class="card-text d-flex justify-content-between">
+                            <div class="post-votes mt-1">
+                                <a href="#" class="vote-link"><span class="icon pt-1 upvote"><object
+                                            data="./icons/upvote.svg"> </object>12</span></a>
+                                <a href="#" class="vote-link"><span class="icon pt-1 downvote"><object
+                                            data="./icons/downvote.svg"> </object>5</span></a>
+                            </div>
+                            <div class="manage-post mt-1">
+                                <a href="./update-post.html" class="btn btn-warning">Update</a>
+                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-body">
+                        <div class="header row">
+                            <div class="card-title fw-bold fs-5 col-12 col-md-auto">Lorem Ipsum Dolor Sit Amet Animi vel
+                                neque fugit ab.</div>
+                            <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">Last Updated 3 mins ago</small>
+                        </div>
+                        <div class="card-text post-body">Lorem Ipsum Dolor Sit Amet, animi vel neque fugit ab, ut ullam
+                            totam. Culpa
+                            perferendis error cumque itaque libero temporibus, aut neque ut quisquamau...</div>
+                        <div class="card-text d-flex justify-content-between">
+                            <div class="post-votes mt-1">
+                                <a href="#" class="vote-link"><span class="icon pt-1 upvote"><object
+                                            data="./icons/upvote.svg"> </object>12</span></a>
+                                <a href="#" class="vote-link"><span class="icon pt-1 downvote"><object
+                                            data="./icons/downvote.svg"> </object>5</span></a>
+                            </div>
+                            <div class="manage-post mt-1">
+                                <a href="./update-post.html" class="btn btn-warning">Update</a>
+                                <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+    <footer class="row m-0 p-0">
+        <div
+          class="social-media-container col-8 col-md-6 d-flex flex-column align-items-center justify-content-center pt-4 pt-md-4 pt-md-5">
+          <h2>Connect Me On</h2> <br>
+          <p class="social-media-info ">
+            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+              <span class="social-media-icons"><i class="bi bi-facebook"></i></span> <span
+                class="nav-link-value"> Facebook</span>
+            </a>
+            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+              <span class="social-media-icons"><i class="bi bi-instagram"></i></span> <span
+                class="nav-link-value"> Instagram</span>
+            </a>
+            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+              <span class="social-media-icons"><i class="bi bi-linkedin"></i></span> <span
+                class="nav-link-value"> Linkedin</span>
+            </a>
+          </p>
+        </div>
+        <div
+          class="page-links-container col-8 col-md-6 d-flex flex-column align-items-center justify-content-center pt-2 pt-md-4 pt-md-5">
+          <h2>Page Links</h2> <br>
+          <p class="page-links-info">
+            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+              <span class="nav-icons"><i class="bi bi-person-square"></i></span> <span
+                class="nav-link-value"> Portfolio</span>
+            </a>
+            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./blog.html">
+              <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
+                class="nav-link-value"> Blogs</span>
+            </a>
+            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./contact-me.html">
+              <span class="nav-icons"><i class="bi bi-telephone-fill"></i></span> <span
+                class="nav-link-value"> Contact Me</span>
+            </a>
+          </p>
+        </div>
+        <div class="copyright-section mt-2 col-12 d-flex align-items-center justify-content-center">
+          <p>© 2021 All Rights Reserved</p>
+        </div>
+    
+      </footer>
+     <script src="./bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
+        </script>
+    </body>
+    
+    </html>

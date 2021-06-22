@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div class="profile-container row m-0 p-5">
+    <div class="profile-image-container col-12 col-md-6 d-flex align-items-center justify-content-center">
+      <img src="{% static 'images/profileimage.png' %}" alt="profile-image" class="profile-image">
+    </div>
+    <div class="profile-info-container col-12 col-md-6 d-flex align-items-center justify-content-center">
+      <div class="profile-info mt-4 fs-5">
+        <h1>Hi! I am a Django Developer</h1>
+        <span class="key">Programming Languages</span><span class="value">C, Java, Python, JavaScript</span> <br>
+        <span class="key">Frontend Skills</span> <span class="value">HTML, CSS, jQuery, React.js</span> <br>
+        <span class="key">Backend Skills</span> <span class="value">Django, Django REST</span> <br>
+        <span class="key">Database</span> <span class="value">Postgresql</span> <br>
+        <span class="key">Others</span> <span class="value">Git, Github, Docker, Azure</span> <br>
+      </div>
+    </div>
+  </div>
+  <div class="projects-container p-2">
+    <div class="container-intro d-flex justify-content-center align-items-center">
+      <h1 class="mt-1 p-2">Projects</h1>
+    </div>
+    <div class="projects-info fs-5">
+      <div class="card-container row m-0">
+        <div class="col-12 offset-sm-2 col-sm-10 col-md-8 mt-2 mb-2 card card-shadow">
+          <div class="row no-gutters">
+            <div class="col-md-4 p-0">
+              <img src="{% static '/images/project1.png' %}" alt="blog-thumbnail" class="project-images" loading= "lazy">
+            </div>
+            <div class="col-md-8 p-0">
+              <div class="card-body">
+                <h3 class="card-title">Dolorum Delectus Laudantium Ipsum</h3>
+                <p class="tags-container">
+                  <span class="badge rounded-pill bg-primary">Django</span>
+                  <span class="badge rounded-pill bg-danger">Postgresql</span>
+                  <span class="badge rounded-pill bg-success">Bootstrap v5</span>
+                </p>
+                <p class="card-text">
+                  <span class="text-uppercase">Key Highlights:</span>
+                  <ul class="project-highlights">
+                    <li>Lorem ipsum dolor sit amet,</li>
+                    <li>Consectetur adipisicing elit,</li>
+                    <li>Lorem ipsum dolor sit amet,</li>
+                    <li>Reprehenderit dolorum sint accusantium,</li>
+                    <li>Laudantium ea laboriosam fuga delectus,</li>
+                    <li>Assumenda esse in consectetur nam fugit laborum,</li>
+                    <li>Lorem ipsum dolor sit amet,</li>
+                  </ul>
+                </p>
+                <p class="card-text">
+                  <ul class="project-links d-flex justify-content-start align-items-start">
+                    <li><button type="button" class="btn btn-info m-1">Live Demo</button></li>
+                    <li><button type="button" class="btn btn-dark m-1">Github Repo</button></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 offset-sm-2 col-sm-10 col-md-8 mt-2 mb-2 card card-shadow">
+          <div class="row no-gutters">
+            <div class="col-md-4 p-0">
+              <img src="{% static '/images/project2.png' %}" alt="blog-thumbnail" class="project-images" loading= "lazy">
+            </div>
+            <div class="col-md-8 p-0">
+              <div class="card-body">
+                <h3 class="card-title">Consectetur Adipisicing Elit</h3>
+                <p class="tags-container">
+                  <span class="badge rounded-pill bg-primary">Django</span>
+                  <span class="badge rounded-pill bg-danger">Postgresql</span>
+                  <span class="badge rounded-pill bg-success">Bootstrap v5</span>
+                </p>
+                <p class="card-text">
+                  <span class="text-uppercase">Key Highlights:</span>
+                  <ul class="project-highlights">
+                    <li>Laudantium ea laboriosam fuga delectus,</li>
+                    <li>Assumenda esse in consectetur nam fugit laborum,</li>
+                    <li>Lorem ipsum dolor sit amet,</li>
+                    <li>Reprehenderit dolorum sint accusantium,</li>
+                    <li>Lorem ipsum dolor sit amet,</li>
+                    <li>Consectetur adipisicing elit</li>
+                  </ul>
+                </p>
+                <p class="card-text">
+                  <ul class="project-links d-flex justify-content-start align-items-start">
+                    <li><button type="button" class="btn btn-info m-1">Live Demo</button></li>
+                    <li><button type="button" class="btn btn-dark m-1">Github Repo</button></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-12 offset-sm-2 col-sm-10 col-md-8 mt-2 mb-2 card card-shadow">
+          <div class="row no-gutters">
+            <div class="col-md-4 p-0">
+              <img src="{% static '/images/project3.jpg' %}" alt="blog-thumbnail" class="project-images" loading= "lazy">
+            </div>
+            <div class="col-md-8 p-0">
+              <div class="card-body">
+                <h3 class="card-title">Reprehenderit Dolorum Sint</h3>
+                <p class="tags-container">
+                  <span class="badge rounded-pill bg-primary">Django</span>
+                  <span class="badge rounded-pill bg-danger">Postgresql</span>
+                  <span class="badge rounded-pill bg-success">Bootstrap v5</span>
+                </p>
+                <p class="card-text">
+                  <span class="text-uppercase">Key Highlights:</span>
+                  <ul class="project-highlights">
+                    <li>Lorem ipsum dolor sit amet,</li>
+                    <li>Consectetur adipisicing elit</li>
+                    <li>Laudantium ea laboriosam fuga delectus,</li>
+                    <li>Assumenda esse in consectetur nam fugit laborum,</li>
+                    <li>Lorem ipsum dolor sit amet,</li>
+                    <li>Reprehenderit dolorum sint accusantium,</li>
+
+                  </ul>
+                </p>
+                <p class="card-text">
+                  <ul class="project-links d-flex justify-content-start align-items-start">
+                    <li><button type="button" class="btn btn-info m-1">Live Demo</button></li>
+                    <li><button type="button" class="btn btn-dark m-1">Github Repo</button></li>
+                  </ul>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="education-container p-3 mt-3 mb-0">
+    <h2 class=" mt-4 mb-4 d-flex align-items-center justify-content-center">Academic History</h2>
+    <div class="education-info-container row m-0">
+      <div class="education-item mt-4 mb-4 offset-1 offset-sm-2 offset-md-3 col-10 col-sm-8 col-md-6">
+        <h4 class="institute-name">XYZ University <span class="institute-duration text-muted">2019-2023</span></h4>
+
+        <h6 class="institute-address fst-italic">Lorem Ipsum City, Earth</h6>
+        <ul class="institute-activity-highlights fs-5">
+          <li>Persuing Bachelors of Computer Science and Engineering</li>
+          <li>Score X CGPA till X Semester</li>
+          <li>Awarded for lorem ipusm activities</li>
+          <li>Partiticaped in International Level Lorem Ipsum Competition</li>
+        </ul>
+      </div>
+      <div class="education-item mt-4 mb-4  offset-1 offset-sm-2 offset-md-3 col-10 col-sm-8 col-md-6">
+        <h4 class="institute-name">XYZ University <span class="institute-duration text-muted">2019-2023</span></h4>
+
+        <h6 class="institute-address fst-italic">Lorem Ipsum City, Earth</h6>
+        <ul class="institute-activity-highlights fs-5">
+          <li>Persuing Bachelors of Computer Science and Engineering</li>
+          <li>Score X CGPA till X Semester</li>
+          <li>Awarded for lorem ipusm activities</li>
+          <li>Partiticaped in International Level Lorem Ipsum Competition</li>
+        </ul>
+      </div>
+      <div class="education-item mt-4 mb-4  offset-1 offset-sm-2 offset-md-3 col-10 col-sm-8 col-md-6">
+        <h4 class="institute-name">XYZ University <span class="institute-duration text-muted">2019-2023</span></h4>
+
+        <h6 class="institute-address fst-italic">Lorem Ipsum City, Earth</h6>
+        <ul class="institute-activity-highlights fs-5">
+          <li>Persuing Bachelors of Computer Science and Engineering</li>
+          <li>Score X CGPA till X Semester</li>
+          <li>Awarded for lorem ipusm activities</li>
+          <li>Partiticaped in International Level Lorem Ipsum Competition</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}

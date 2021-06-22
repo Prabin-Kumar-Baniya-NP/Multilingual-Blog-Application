@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container form-container mt-5 mb-5">
+    <div class="post-creation-form m-3 p-3">
+        <h3 class="mt-2 mb-4">Enter the following details to create a new Category</h3>
+        <form class="fs-5 mt-3 mb-3" method="POST" action="">
+            {% csrf_token %}
+            <div class="form-floating mb-3">
+                {{ form.name }}
+                {{ form.name.label_tag }}
+                {{ form.name.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.description }}
+                {{ form.description.label_tag }}
+                {{ form.description.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.created_by }}
+                {{ form.created_by.label_tag }}
+                {{ form.created_by.errors }}
+            </div>
+            <button type="submit" class="btn btn-success">Create Category</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
