@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import fields, widgets
+from category.models import Category
 
 class CategoryCreationForm(forms.Form):
     name = forms.CharField(
@@ -28,3 +30,20 @@ class CategoryCreationForm(forms.Form):
             'placeholder': "Enter Your Username",
         })
         )
+
+class CategoryUpdationForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ["name", "description"]
+        widgets = {
+            'name': forms.TextInput(attrs = {
+                    'class': 'form-control',
+                    'id' : "category-name",
+                    'placeholder': "Enter the Category Name",
+                    }),
+            'description': forms.Textarea(attrs={
+                    'class': 'form-control',
+                    'id': "category-description",
+                    'placeholder' : "Enter the Category Description",
+                    })
+        }
