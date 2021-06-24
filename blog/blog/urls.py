@@ -23,4 +23,5 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name = "blog/index.html")),
     path("contact-me/", TemplateView.as_view(template_name = "blog/contact-me.html")),
     path("category/", include(('category.urls'), namespace = "category")),
+    path("post/", include(("post.urls"), namespace="post")),
 ]

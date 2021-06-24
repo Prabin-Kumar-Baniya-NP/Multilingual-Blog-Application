@@ -1,105 +1,35 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap CSS -->
-  <link href="./bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="./styles.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="./bootstrap-icons/font/bootstrap-icons.css">
-  <title>Your Name Here</title>
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand ms-sm-2 ms-md-3 ms-lg-4" href="#">Your Name Here</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav ms-auto">
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
-                <span class="nav-icons"><i class="bi bi-person-square"></i></span> <span
-                  class="nav-link-value"> Portfolio</span>
-              </a>
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./blog.html">
-                <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
-                  class="nav-link-value"> Blogs</span>
-              </a>
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./contact-me.html">
-                <span class="nav-icons"><i class="bi bi-telephone-fill"></i></span> <span
-                  class="nav-link-value"> Contact Me</span>
-              </a>
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./login.html">
-                <span class="nav-icons"><i class="bi bi-box-arrow-in-right"></i></span> <span
-                    class="nav-link-value"> Sign Up / Login </span>
-            </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+{% extends 'base.html' %}
+{% block content %}
     <div class="container mt-5">
         <div class="post-container mt-2 mb-3 p-3">
             <div class="title">
-                <p class="fs-3 fw-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                <p class="fs-3 fw-bold">{{ post.title }}</p>
             </div>
             <div class="publication-date m-1">
-                1 Jan, 2021, Lorem Ipsum
+                {{ post.published_on }}
             </div>
             <div class="updation-date text-muted m-1">
-                Last Updated 4 days ago
+              Last updated {{ post.published_on|timesince:post.last_updated }} ago
             </div>
             <div class="post-image mt-4">
                 <img src="./images/blog.jpg" width="100%" height="100%" class="post-image" loading = "lazy">
             </div>
             <div class="post-body mt-2 fs-5 lh-lg">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aperiam perferendis esse cumque quas modi
-                sapiente laborum illum tempore quo. Ipsa odio repellendus, molestias excepturi quia dolores veniam
-                voluptatum. Culpa, ipsam!
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid nam recusandae minus at eum quo. Hic
-                similique illo esse dolore veniam placeat quisquam, iure incidunt dignissimos amet tenetur distinctio
-                quidem?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit eum nemo soluta numquam impedit est
-                consequuntur deleniti voluptatem beatae temporibus a, deserunt illo voluptates vel. Porro laudantium
-                tempore earum non.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium quibusdam odit, nihil, quisquam
-                impedit nam consequatur mollitia modi suscipit blanditiis minus animi ratione, voluptatum dolorum. Quia
-                commodi dolor soluta totam?
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero totam recusandae placeat aperiam
-                quaerat
-                blanditiis quia expedita, nemo quod molestiae quos, vel ipsam accusantium molestias consequuntur
-                exercitationem. Quis, officiis odio.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum impedit debitis ad tempore distinctio
-                dolorem fuga obcaecati repellat. Mollitia provident nesciunt eum beatae placeat libero eveniet
-                architecto laudantium, adipisci consectetur.
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint cupiditate quia laborum nam magnam,
-                similique ipsam ratione debitis quod odit eos ullam labore laudantium dolore earum. Accusantium aliquam
-                dolor ex.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur quasi quaerat ipsum at pariatur.
-                Laudantium libero tenetur veritatis nostrum sapiente culpa aspernatur doloribus tempora, ipsa maxime
-                saepe cum, illum eveniet.
+              {{ post.body }}
             </div>
             <div class="post-votes m-1">
-                <a href="#" class="vote-link fs-5"><span class="icon pt-1 upvote"><object data="./icons/upvote.svg">
-                        </object>41</span></a>
-                <a href="#" class="vote-link fs-5"><span class="icon pt-1 downvote"><object data="./icons/downvote.svg">
-                        </object>30</span></a>
+                <a href="#" class="vote-link fs-5"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>
+                  {{ post.likes }}
+                </span></a>
+                <a href="#" class="vote-link fs-5"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>
+                  {{ post.dislikes }}
+                </span></a>
             </div>
             <div class="comments-container mt-5 p-2">
                 <h4>Comments</h4>
                 <div class="comment-item row mt-3 mb-3">
-                    <div class="user-profile-image col-2 col-md-1">
-                        <img src="./icons/person.svg" class="user-small-image" width="100%" height="100%">
+                    <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-person"></i>
                     </div>
                     <div class="username col-10 d-flex align-items-center justify-content-start">
                         <b>Username lorem</b>
@@ -112,15 +42,13 @@
                     </div>
 
                     <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                        <a href="#" class="vote-link"><span class="icon upvote"><object data="./icons/upvote.svg">
-                                </object>4</span></a>
-                        <a href="#" class="vote-link"><span class="icon downvote"><object data="./icons/downvote.svg">
-                                </object>2</span></a>
+                        <a href="#" class="vote-link"><span class="icon upvote"><i class="bi bi-hand-thumbs-up"></i>4</span></a>
+                        <a href="#" class="vote-link"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>2</span></a>
                     </div>
                 </div>
                 <div class="comment-item row mt-3 mb-3">
-                    <div class="user-profile-image col-2 col-md-1">
-                        <img src="./icons/person.svg" class="user-small-image" width="100%" height="100%">
+                    <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-person"></i>
                     </div>
                     <div class="username col-10 d-flex align-items-center justify-content-start">
                         <b>Username lorem</b>
@@ -133,15 +61,13 @@
                     </div>
 
                     <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                        <a href="#" class="vote-link"><span class="icon upvote"><object data="./icons/upvote.svg">
-                                </object>4</span></a>
-                        <a href="#" class="vote-link"><span class="icon downvote"><object data="./icons/downvote.svg">
-                                </object>2</span></a>
+                      <i class="bi bi-hand-thumbs-up"></i>4</span></a>
+                        <a href="#" class="vote-link"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>2</span></a>
                     </div>
                 </div>
                 <div class="comment-item row mt-3 mb-3">
-                    <div class="user-profile-image col-2 col-md-1">
-                        <img src="./icons/person.svg" class="user-small-image" width="100%" height="100%">
+                    <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
+                        <i class="bi bi-person"></i>
                     </div>
                     <div class="username col-10 d-flex align-items-center justify-content-start">
                         <b>Username lorem</b>
@@ -154,62 +80,12 @@
                     </div>
 
                     <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                        <a href="#" class="vote-link"><span class="icon upvote"><object data="./icons/upvote.svg">
-                                </object>4</span></a>
-                        <a href="#" class="vote-link"><span class="icon downvote"><object data="./icons/downvote.svg">
-                                </object>2</span></a>
+                        <a href="#" class="vote-link"><span class="icon upvote"><i class="bi bi-hand-thumbs-up"></i>4</span></a>
+                        <a href="#" class="vote-link"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>2</span></a>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
-
-
-    <footer class="row m-0 p-0">
-        <div
-          class="social-media-container col-8 col-md-6 d-flex flex-column align-items-center justify-content-center pt-4 pt-md-4 pt-md-5">
-          <h2>Connect Me On</h2> <br>
-          <p class="social-media-info ">
-            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
-              <span class="social-media-icons"><i class="bi bi-facebook"></i></span> <span
-                class="nav-link-value"> Facebook</span>
-            </a>
-            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
-              <span class="social-media-icons"><i class="bi bi-instagram"></i></span> <span
-                class="nav-link-value"> Instagram</span>
-            </a>
-            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
-              <span class="social-media-icons"><i class="bi bi-linkedin"></i></span> <span
-                class="nav-link-value"> Linkedin</span>
-            </a>
-          </p>
-        </div>
-        <div
-          class="page-links-container col-8 col-md-6 d-flex flex-column align-items-center justify-content-center pt-2 pt-md-4 pt-md-5">
-          <h2>Page Links</h2> <br>
-          <p class="page-links-info">
-            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
-              <span class="nav-icons"><i class="bi bi-person-square"></i></span> <span
-                class="nav-link-value"> Portfolio</span>
-            </a>
-            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./blog.html">
-              <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
-                class="nav-link-value"> Blogs</span>
-            </a>
-            <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./contact-me.html">
-              <span class="nav-icons"><i class="bi bi-telephone-fill"></i></span> <span
-                class="nav-link-value"> Contact Me</span>
-            </a>
-          </p>
-        </div>
-        <div class="copyright-section mt-2 col-12 d-flex align-items-center justify-content-center">
-          <p>© 2021 All Rights Reserved</p>
-        </div>
-    
-      </footer>
-     <script src="./bootstrap/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-        </script>
-    </body>
-    
-    </html>
+{% endblock %}
