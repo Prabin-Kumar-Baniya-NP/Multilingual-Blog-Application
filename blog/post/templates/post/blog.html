@@ -43,8 +43,8 @@
             </ul>
             <p class="text-center">
                 <a href="#" class="btn btn-dark mt-1 mb-1">Load More</a> <br>
-                <a href="./create-category.html" class="btn btn-success mt-1 mb-1">Create Category</a>
-                <a href="./manage-category-list.html" class="btn btn-warning mt-1 mb-1">Manage Category</a>
+                <a href="{% url 'category:create-category' %}" class="btn btn-success mt-1 mb-1">Create Category</a>
+                <a href="{% url 'category:manage-category' %}" class="btn btn-warning mt-1 mb-1">Manage Category</a>
             </p>
         </div>
         <div class="main-body col-12 col-lg-9 m-2 p-3">
@@ -56,8 +56,8 @@
                 <div
                     class="col-12 col-md-6 d-flex flex-row flex-wrap justify-content-center align-items-center justify-content-md-start align-items-md-start">
                     <input type="submit" class="btn btn-dark mt-2 mb-2 ms-1 me-1" value="Search">
-                    <a href="./create-post.html" class="btn btn-success mt-2 mb-2 ms-1 me-1">Create Post</a>
-                    <a href="./manage-post-list.html" class="btn btn-warning mt-2 mb-2 ms-1 me-1">Manage Post</a>
+                    <a href="{% url 'post:create-post' %}" class="btn btn-success mt-2 mb-2 ms-1 me-1">Create Post</a>
+                    <a href="{% url 'post:manage-post' %}" class="btn btn-warning mt-2 mb-2 ms-1 me-1">Manage Post</a>
                 </div>
             </div>
             <div class="blog-container col-12 m-1 pt-3 pb-3">
@@ -81,7 +81,7 @@
                                     <a href="#" class="vote-link"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>{{ post.likes }}</span></a>
                                     <a href="#" class="vote-link"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>{{ post.dislikes }}</span></a>
                                 </div>
-                                <span class="text-muted mt-1"><a href="./post.html">Click Here To Read</a></span>
+                                <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.id %}">Click Here To Read</a></span>
                             </div>
                         </div>
                     </div>
