@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView 
 from post.models import Post
+from category.models import Category
 from post.forms import PostCreationForm, PostUpdationForm
 from django.urls import reverse_lazy
 
@@ -23,8 +24,13 @@ class DashboardView(ListView):
     model = Post
     context_object_name = "posts"
     template_name = "post/blog.html"
+    paginate_by = 5
 
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all().values("id", "name")[:4]
+        return context
+    
 class PostDetailView(DetailView):
     model = Post
     context_object_name = "post"
@@ -34,6 +40,7 @@ class ManagePostListView(ListView):
     model = Post
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
+    paginate_by = 5
 
 class PostUpdateView(UpdateView):
     model = Post
