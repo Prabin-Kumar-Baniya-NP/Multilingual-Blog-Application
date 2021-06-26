@@ -28,11 +28,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="{% url 'index' %}">
                 <span class="nav-icons"><i class="bi bi-person-square"></i></span> <span
                   class="nav-link-value"> Portfolio</span>
               </a>
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./blog.html">
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="{% url 'post:dashboard' %}">
                 <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
                   class="nav-link-value"> Blogs</span>
               </a>
