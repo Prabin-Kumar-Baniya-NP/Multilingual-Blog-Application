@@ -7,7 +7,7 @@
             Choose Any Category To Update or Delete
         </div>
         <ul class="list-group m-2">
-            {% for category in categories %}
+            {% for category in page_obj %}
             <li class="list-group-item d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
                     {{ category.name }}
@@ -38,7 +38,31 @@
             </li>
             {% endfor %}
         </ul>
+        <div class="pagination-container mt-3">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
+                  </li>
+                  {% endif %}
+                  <div class="m-2">
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                    </span>
+                  </div>
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                </li>
+                <li><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+                {% endif %}
+              </ul>
+        </div>
     </div>
+    
 </div>
 </div>
 {% endblock %}

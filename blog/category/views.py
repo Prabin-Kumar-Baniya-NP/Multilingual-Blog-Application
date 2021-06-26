@@ -2,7 +2,8 @@ from django.shortcuts import render
 from category.forms import CategoryCreationForm, CategoryUpdationForm
 from category.models import Category
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from django.core.paginator import Paginator
 
 # Create your views here.
 def create_category(request):
@@ -25,10 +26,11 @@ def manage_category(request):
     """
     This view will show all the categories which is created by the user
     """
-    context = {
-        'categories': Category.objects.all()
-    }
-    return render(request, "category/manage-category-list.html", context)
+    categories = Category.objects.all()
+    paginator = Paginator(categories, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'category/manage-category-list.html', {'page_obj': page_obj})
 
 def delete_category(request, category_id):
     """
@@ -55,3 +57,13 @@ def update_category(request, category_id):
             'form': CategoryUpdationForm(instance = requested_category),
         }
         return render(request, "category/update-category.html", context)
+
+def get_categories(request, pnum):
+    categories  = Category.objects.filter().order_by("id").values("id", "name")
+    p = Paginator(categories, 4)
+    if (pnum in p.page_range):
+        page_num = p.page(pnum)
+        page_num_list = list(page_num.object_list)
+        return JsonResponse(page_num_list, safe=False)
+    else:
+        return JsonResponse({}, safe=False)
