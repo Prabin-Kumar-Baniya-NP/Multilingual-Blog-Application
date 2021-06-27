@@ -1,91 +1,123 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container mt-5">
-        <div class="post-container mt-2 mb-3 p-3">
-            <div class="title">
-                <p class="fs-3 fw-bold">{{ post.title }}</p>
-            </div>
-            <div class="publication-date m-1">
-                {{ post.published_on }}
-            </div>
-            <div class="updation-date text-muted m-1">
-              Last updated {{ post.published_on|timesince:post.last_updated }} ago
-            </div>
-            <div class="post-image mt-4">
-                <img src="./images/blog.jpg" width="100%" height="100%" class="post-image" loading = "lazy">
-            </div>
-            <div class="post-body mt-2 fs-5 lh-lg">
-              {{ post.body }}
-            </div>
-            <div class="post-votes m-1">
-                <a href="#" class="vote-link fs-5"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>
-                  {{ post.likes }}
-                </span></a>
-                <a href="#" class="vote-link fs-5"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>
-                  {{ post.dislikes }}
-                </span></a>
-            </div>
-            <div class="comments-container mt-5 p-2">
-                <h4>Comments</h4>
-                <div class="comment-item row mt-3 mb-3">
-                    <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div class="username col-10 d-flex align-items-center justify-content-start">
-                        <b>Username lorem</b>
-                    </div>
-                    <div class="comment offset-2 col-10 offset-md-1 col-md-11">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid nam recusandae minus at
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil eum deserunt ipsa
-                        sunt possimus fugit maiores modi adipisci veniam. Quo fugiat iure a sit sequi voluptatibus
-                        quasi in ex.
-                    </div>
-
-                    <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                        <a href="#" class="vote-link"><span class="icon upvote"><i class="bi bi-hand-thumbs-up"></i>4</span></a>
-                        <a href="#" class="vote-link"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>2</span></a>
-                    </div>
-                </div>
-                <div class="comment-item row mt-3 mb-3">
-                    <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div class="username col-10 d-flex align-items-center justify-content-start">
-                        <b>Username lorem</b>
-                    </div>
-                    <div class="comment offset-2 col-10 offset-md-1 col-md-11">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid nam recusandae minus at
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil eum deserunt ipsa
-                        sunt possimus fugit maiores modi adipisci veniam. Quo fugiat iure a sit sequi voluptatibus
-                        quasi in ex.
-                    </div>
-
-                    <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                      <i class="bi bi-hand-thumbs-up"></i>4</span></a>
-                        <a href="#" class="vote-link"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>2</span></a>
-                    </div>
-                </div>
-                <div class="comment-item row mt-3 mb-3">
-                    <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div class="username col-10 d-flex align-items-center justify-content-start">
-                        <b>Username lorem</b>
-                    </div>
-                    <div class="comment offset-2 col-10 offset-md-1 col-md-11">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquid nam recusandae minus at
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur nihil eum deserunt ipsa
-                        sunt possimus fugit maiores modi adipisci veniam. Quo fugiat iure a sit sequi voluptatibus
-                        quasi in ex.
-                    </div>
-
-                    <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                        <a href="#" class="vote-link"><span class="icon upvote"><i class="bi bi-hand-thumbs-up"></i>4</span></a>
-                        <a href="#" class="vote-link"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>2</span></a>
-                    </div>
-                </div>
-            </div>
-
+<div class="container mt-5">
+    <div class="post-container mt-2 mb-3 p-3">
+        <div class="title">
+            <p class="fs-3 fw-bold">{{ post.title }}</p>
         </div>
+        <div class="publication-date m-1">
+            {{ post.published_on }}
+        </div>
+        <div class="updation-date text-muted m-1">
+            Last updated {{ post.published_on|timesince:post.last_updated }} ago
+        </div>
+        <div class="post-image mt-4">
+            <img src="./images/blog.jpg" width="100%" height="100%" class="post-image" loading="lazy">
+        </div>
+        <div class="post-body mt-2 fs-5 lh-lg">
+            {{ post.body }}
+        </div>
+        <div class="post-votes m-1">
+            <a href="#" class="vote-link fs-5"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>
+                    {{ post.likes }}
+                </span></a>
+            <a href="#" class="vote-link fs-5"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>
+                    {{ post.dislikes }}
+                </span></a>
+        </div>
+        <div class="comments-container mt-5 p-2" id="post-comments-container">
+            <h4>Comments</h4>
+        </div>
+       <div class="load-button text-center">
+        <button type="button" class="btn btn-dark" id="load-comments">Load More</button>
+       </div>
+        <script>
+            const postID = {{ post.id }}
+            let pnum = 0;
+            async function getComments() {
+                pnum = pnum + 1;
+                domainName = "http://127.0.0.1:8000/"
+                url = domainName + 'comments/get-comments/' + postID + "/" + pnum;
+
+                params = {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        credentials: 'same-origin',
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                }
+                try {
+                    response = await fetch(url, params);
+                    data = await response.json();
+                    commentsContainer = document.getElementById("post-comments-container");
+                    for(let i = 0; i < data.length; i++){
+                            divCommentItem = document.createElement("div");
+                            divCommentItem.classList.add("comment-item", "row", "mt-3", "mb-3");
+                            
+                            divProfileImage = document.createElement("div");
+                            divProfileImage.classList.add("user-profile-image", "col-2", "col-md-1", "d-flex", "align-items-center", "justify-content-center");
+                            itag = document.createElement("i");
+                            itag.classList.add("bi", "bi-person");
+                            divProfileImage.appendChild(itag);
+                            divCommentItem.appendChild(divProfileImage);
+
+                            divUsername = document.createElement("div");
+                            divUsername.classList.add("username", "col-10", "d-flex", "align-items-center", "justify-content-start")
+                            btag = document.createElement("b");
+                            btag.innerText = data[i].commented_by;
+                            divUsername.appendChild(btag);
+                            divCommentItem.appendChild(divUsername);
+
+                            divComment = document.createElement("div");
+                            divComment.classList.add("comment", "offset-2", "col-10", "offset-md-1", "col-md-11");
+                            divComment.innerText = data[i].body;
+                            divCommentItem.appendChild(divComment);
+
+                            divCommentVotes = document.createElement("div");
+                            divCommentVotes.classList.add("user-comments-vote", "offset-2", "col-10", "offset-md-1", "col-md-11")
+        
+                            anchortagForLikes = document.createElement("a");
+                            anchortagForLikes.href = "#";
+                            anchortagForLikes.classList.add("vote-link");
+                            spanTagForLikes = document.createElement("span");
+                            spanTagForLikes.classList.add("icon", "upvote");
+                            iTagForLikes = document.createElement("i");
+                            iTagForLikes.classList.add("bi", "bi-hand-thumbs-up");
+                            spanTagForLikes.appendChild(iTagForLikes);
+                            likesNumberTextNode = document.createTextNode(data[i].likes);
+                            spanTagForLikes.appendChild(likesNumberTextNode);
+                            anchortagForLikes.appendChild(spanTagForLikes);
+
+                            anchortagForDislikes = document.createElement("a");
+                            anchortagForDislikes.href = "#";
+                            anchortagForDislikes.classList.add("vote-link");
+                            spanTagForDislikes = document.createElement("span");
+                            spanTagForDislikes.classList.add("icon", "downvote");
+                            iTagForDislikes = document.createElement("i");
+                            iTagForDislikes.classList.add("bi", "bi-hand-thumbs-down");
+                            spanTagForDislikes.appendChild(iTagForDislikes);
+                            dislikesNumberTextNode = document.createTextNode(data[i].likes);
+                            spanTagForDislikes.appendChild(dislikesNumberTextNode);
+                            anchortagForDislikes.appendChild(spanTagForDislikes);
+
+                            divCommentVotes.appendChild(anchortagForLikes);
+                            divCommentVotes.appendChild(anchortagForDislikes);
+                            divCommentItem.appendChild(divCommentVotes);
+
+                            commentsContainer.appendChild(divCommentItem);
+                            console.log(commentsContainer);
+                    }
+                } catch (error) {
+                   console.log(error);
+                }
+
+            }
+            getComments();
+            loadCommentsbtn = document.getElementById("load-comments");
+            loadCommentsbtn.addEventListener("click", getComments);
+            
+        </script>
     </div>
+</div>
 {% endblock %}
