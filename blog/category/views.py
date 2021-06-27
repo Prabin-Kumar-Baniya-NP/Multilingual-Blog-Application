@@ -2,7 +2,7 @@ from django.shortcuts import render
 from category.forms import CategoryCreationForm, CategoryUpdationForm
 from category.models import Category
 from django.urls import reverse
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -59,11 +59,14 @@ def update_category(request, category_id):
         return render(request, "category/update-category.html", context)
 
 def get_categories(request, pnum):
-    categories  = Category.objects.filter().order_by("id").values("id", "name")
-    p = Paginator(categories, 4)
-    if (pnum in p.page_range):
-        page_num = p.page(pnum)
-        page_num_list = list(page_num.object_list)
-        return JsonResponse(page_num_list, safe=False)
+    if request.is_ajax():
+        categories  = Category.objects.filter().order_by("id").values("id", "name")
+        p = Paginator(categories, 4)
+        if (pnum in p.page_range):
+            page_num = p.page(pnum)
+            category_objects_list = list(page_num.object_list)
+            return JsonResponse(category_objects_list, safe=False)
+        else:
+            return JsonResponse({}, safe=False)
     else:
-        return JsonResponse({}, safe=False)
+        raise Http404("This type of get method is not allowed")
