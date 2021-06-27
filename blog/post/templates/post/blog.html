@@ -33,6 +33,7 @@
                 </div>
             </div>
             <div class="blog-container col-12 m-1 pt-3 pb-3">
+                {% if page_obj %}
                 <div class="blog-type-title fs-4 p-1 p-md-2">
                     <h5 class="text-center">Here is the Latest Blogs</h5>
                 </div>
@@ -84,6 +85,12 @@
                         </div>
                         
                 </div>
+                {% else %}
+                <div class="text-center">
+                    No post found in the database
+                </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
