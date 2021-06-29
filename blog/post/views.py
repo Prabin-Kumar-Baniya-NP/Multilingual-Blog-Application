@@ -6,6 +6,7 @@ from post.models import Post
 from category.models import Category
 from post.forms import PostCreationForm, PostUpdationForm
 from django.urls import reverse_lazy
+from comment.forms import AddCommentForm
 
 class PostCreateView(CreateView):
     """
@@ -35,6 +36,12 @@ class PostDetailView(DetailView):
     model = Post
     context_object_name = "post"
     template_name = "post/post.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = AddCommentForm()
+        return context
+    
 
 class ManagePostListView(ListView):
     model = Post

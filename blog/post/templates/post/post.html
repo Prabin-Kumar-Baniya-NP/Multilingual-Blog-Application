@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="container mt-5">
     <div class="post-container mt-2 mb-3 p-3">
@@ -31,92 +32,31 @@
        <div class="load-button text-center">
         <button type="button" class="btn btn-dark" id="load-comments">Load More</button>
        </div>
-        <script>
-            const postID = {{ post.id }}
-            let pnum = 0;
-            async function getComments() {
-                pnum = pnum + 1;
-                domainName = "http://127.0.0.1:8000/"
-                url = domainName + 'comments/get-comments/' + postID + "/" + pnum;
 
-                params = {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        credentials: 'same-origin',
-                        'X-Requested-With': 'XMLHttpRequest',
-                    },
-                }
-                try {
-                    response = await fetch(url, params);
-                    data = await response.json();
-                    commentsContainer = document.getElementById("post-comments-container");
-                    for(let i = 0; i < data.length; i++){
-                            divCommentItem = document.createElement("div");
-                            divCommentItem.classList.add("comment-item", "row", "mt-3", "mb-3");
-                            
-                            divProfileImage = document.createElement("div");
-                            divProfileImage.classList.add("user-profile-image", "col-2", "col-md-1", "d-flex", "align-items-center", "justify-content-center");
-                            itag = document.createElement("i");
-                            itag.classList.add("bi", "bi-person");
-                            divProfileImage.appendChild(itag);
-                            divCommentItem.appendChild(divProfileImage);
-
-                            divUsername = document.createElement("div");
-                            divUsername.classList.add("username", "col-10", "d-flex", "align-items-center", "justify-content-start")
-                            btag = document.createElement("b");
-                            btag.innerText = data[i].commented_by;
-                            divUsername.appendChild(btag);
-                            divCommentItem.appendChild(divUsername);
-
-                            divComment = document.createElement("div");
-                            divComment.classList.add("comment", "offset-2", "col-10", "offset-md-1", "col-md-11");
-                            divComment.innerText = data[i].body;
-                            divCommentItem.appendChild(divComment);
-
-                            divCommentVotes = document.createElement("div");
-                            divCommentVotes.classList.add("user-comments-vote", "offset-2", "col-10", "offset-md-1", "col-md-11")
+       <form class="fs-5 mt-3 mb-3" id="new-comment">
+        {% csrf_token %}
+        <div class="form-floating mb-3">
+          {{ form.post }}
+          {{ form.post.label_tag }}
+          {{ form.post.errors }}
+        </div>
+        <div class="form-floating mb-3">
+          {{ form.body }}
+          {{ form.body.label_tag }}
+          {{ form.body.errors }}
+        </div>
+        <div class="form-floating mb-3">
+            {{ form.commented_by }}
+            {{ form.commented_by.label_tag }}
+            {{ form.commented_by.errors }}
+          </div>
         
-                            anchortagForLikes = document.createElement("a");
-                            anchortagForLikes.href = "#";
-                            anchortagForLikes.classList.add("vote-link");
-                            spanTagForLikes = document.createElement("span");
-                            spanTagForLikes.classList.add("icon", "upvote");
-                            iTagForLikes = document.createElement("i");
-                            iTagForLikes.classList.add("bi", "bi-hand-thumbs-up");
-                            spanTagForLikes.appendChild(iTagForLikes);
-                            likesNumberTextNode = document.createTextNode(data[i].likes);
-                            spanTagForLikes.appendChild(likesNumberTextNode);
-                            anchortagForLikes.appendChild(spanTagForLikes);
-
-                            anchortagForDislikes = document.createElement("a");
-                            anchortagForDislikes.href = "#";
-                            anchortagForDislikes.classList.add("vote-link");
-                            spanTagForDislikes = document.createElement("span");
-                            spanTagForDislikes.classList.add("icon", "downvote");
-                            iTagForDislikes = document.createElement("i");
-                            iTagForDislikes.classList.add("bi", "bi-hand-thumbs-down");
-                            spanTagForDislikes.appendChild(iTagForDislikes);
-                            dislikesNumberTextNode = document.createTextNode(data[i].likes);
-                            spanTagForDislikes.appendChild(dislikesNumberTextNode);
-                            anchortagForDislikes.appendChild(spanTagForDislikes);
-
-                            divCommentVotes.appendChild(anchortagForLikes);
-                            divCommentVotes.appendChild(anchortagForDislikes);
-                            divCommentItem.appendChild(divCommentVotes);
-
-                            commentsContainer.appendChild(divCommentItem);
-                    }
-                } catch (error) {
-                   console.log(error);
-                }
-
-            }
-            getComments();
-            loadCommentsbtn = document.getElementById("load-comments");
-            loadCommentsbtn.addEventListener("click", getComments);
-            
-        </script>
+        <button type="button" id="form-submit-btn">Add Comment</button>
+      </form>
+      <script>
+          var postID = {{ post.id }}
+      </script>
+       <script src="{% static 'js/comment-script.js' %}"></script>
     </div>
 </div>
 {% endblock %}

@@ -1,25 +1,25 @@
-pagination_num = 1;
+let pagination_num = 1;
 async function getCategories() {
-    domainName = "http://127.0.0.1:8000/"
+    const domainName = "http://127.0.0.1:8000/"
+    const url = domainName + 'category/get-categories/' + pagination_num;
     pagination_num = pagination_num + 1;
-    url = domainName + 'category/get-categories/' + pagination_num;
 
-    params = {
+    const params = {
         method: 'GET',
         headers: {
-            'Accept': 'application/json',
-            credentials: 'same-origin',
+            'Content-Type': 'application/json',
             'X-Requested-With': 'XMLHttpRequest',
         },
+        credentials: 'same-origin',
     }
     try {
-        response = await fetch(url, params);
-        data = await response.json();
-        ul = document.querySelector("ul")
+        const response = await fetch(url, params);
+        const data = await response.json();
+        let ul = document.querySelector("ul")
         for (let i = 0; i < data.length; i++) {
-            li = document.createElement("li");
+            let li = document.createElement("li");
             li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-start");
-            div = document.createElement("div");
+            let div = document.createElement("div");
             div.classList.add("ms-2", "me-auto");
             div.innerText = data[i].name;
             li.appendChild(div);
