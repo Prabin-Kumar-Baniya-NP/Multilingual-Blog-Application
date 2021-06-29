@@ -1,8 +1,12 @@
+from django import forms
+from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.http import JsonResponse
 from comment.models import Comment
-from django.http import Http404
+from django.http import Http404, HttpResponseBadRequest
 from django.core.paginator import Paginator
+from comment.forms import AddCommentForm
+import json
 
 def get_comments_ajax(request, postID, pnum):
     if request.is_ajax():
@@ -23,3 +27,17 @@ def get_comments_ajax(request, postID, pnum):
             return JsonResponse({}, safe=False)
     else:
         raise Http404("This type of get method is not allowed")
+
+def post_comment_ajax(request):
+    if request.method == "POST" and request.is_ajax() == True:
+        body_unicode = request.body.decode('utf-8')
+        form_data = json.loads(body_unicode)
+        new_comment = AddCommentForm(form_data)
+        if new_comment.is_valid():
+            new_comment.save()
+            return JsonResponse({'message':'comment added successfully'}, safe=False)
+        else:
+            raise Http404("Invalid Data!")
+    else:
+        raise Http404("This type of method is not allowed")
+    
