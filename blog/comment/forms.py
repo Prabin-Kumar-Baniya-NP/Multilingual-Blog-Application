@@ -5,8 +5,13 @@ class AddCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["post", "body", "commented_by"]
+        labels = {
+            'post': '',
+            'body': "Enter a new Comment",
+            'commented_by': ''
+        }
         widgets = {
-            'post': forms.NumberInput(attrs={
+            'post': forms.HiddenInput(attrs={
                 'class': 'form-control',
                 'id': "post-id",
                 'placeholder': "Enter the Post ID",
@@ -16,7 +21,7 @@ class AddCommentForm(forms.ModelForm):
                 'id': "comment-body",
                 'placeholder': "Enter the Comment",
             }),
-            'commented_by': forms.TextInput(attrs={
+            'commented_by': forms.HiddenInput(attrs={
                 'class': 'form-control',
                 'id': "username",
                 'placeholder': "Enter your username",
