@@ -1,4 +1,4 @@
-let pagination_num = 1;
+let pagination_num = 2;
 async function getCategories() {
     const domainName = "http://127.0.0.1:8000/"
     const url = domainName + 'category/get-categories/' + pagination_num;

@@ -31,7 +31,7 @@ function displayComments(data) {
 
         let anchortagForLikes = document.createElement("a");
         anchortagForLikes.href = "#";
-        anchortagForLikes.classList.add("vote-link");
+        anchortagForLikes.classList.add("vote-link", "m-1");
         let spanTagForLikes = document.createElement("span");
         spanTagForLikes.classList.add("icon", "upvote");
         let iTagForLikes = document.createElement("i");
@@ -43,7 +43,7 @@ function displayComments(data) {
 
         let anchortagForDislikes = document.createElement("a");
         anchortagForDislikes.href = "#";
-        anchortagForDislikes.classList.add("vote-link");
+        anchortagForDislikes.classList.add("vote-link", "m-1");
         let spanTagForDislikes = document.createElement("span");
         spanTagForDislikes.classList.add("icon", "downvote");
         let iTagForDislikes = document.createElement("i");
@@ -76,7 +76,12 @@ async function getComments() {
     try {
         const response = await fetch(getCommentsURL, params);
         const data = await response.json();
-        displayComments(data);
+        if (Object.keys(data).length === 0){
+            loadCommentsbtn.style.display = "None"
+        }else{
+            displayComments(data);
+        }
+        
 
     } catch (error) {
         console.log(error);
@@ -85,8 +90,6 @@ async function getComments() {
 getComments();
 loadCommentsbtn = document.getElementById("load-comments");
 loadCommentsbtn.addEventListener("click", getComments);
-
-
 
 function getCookie(name) {
     let cookieValue = null;
@@ -103,9 +106,9 @@ function getCookie(name) {
     return cookieValue;
 }
 
-
 let form = document.getElementById("new-comment");
 let formSubmitBtn = document.getElementById("form-submit-btn");
+
 async function postComment() {
     const formData = new FormData(form);
     const plainFormData = Object.fromEntries((formData.entries()));
@@ -125,14 +128,18 @@ async function postComment() {
         body: formDataJSONString,
     }
     try{
-        const response = await fetch(postCommentURL, params);
-        const data = await response.json();
-        console.log(formDataJSONString);
+        const new_request = await fetch(postCommentURL, params);
+        const response = await new_request.json();
+        if (response.status == "success"){
+            let commentObject = JSON.parse(formDataJSONString);
+            commentObject.likes = 0;
+            commentObject.dislikes = 0;
+            const commentArray = [commentObject];
+            displayComments(commentArray);
+        }
     }
     catch(error){
         console.log("Error");
     }
-    
-    
 }
 formSubmitBtn.addEventListener("click", postComment);
