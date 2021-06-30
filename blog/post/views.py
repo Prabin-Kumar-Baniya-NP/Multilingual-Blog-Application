@@ -1,3 +1,6 @@
+from django.db.models import query
+from django.http import request
+from comment.models import Comment
 from django.db import models
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -27,6 +30,10 @@ class DashboardView(ListView):
     template_name = "post/blog.html"
     paginate_by = 5
 
+    def get_queryset(self):
+        queryset = Post.objects.filter().order_by("id")
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all().order_by("id").values("id", "name")[:4]
@@ -39,7 +46,14 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["form"] = AddCommentForm()
+        context["form"] = AddCommentForm(
+            initial={
+                'post': self.kwargs['pk'],
+                'commented_by': self.request.user
+                }
+            )
+        if self.request.user.is_authenticated:
+            context["user_comments"] = Comment.objects.filter(commented_by = self.request.user)
         return context
     
 
@@ -48,6 +62,11 @@ class ManagePostListView(ListView):
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
     paginate_by = 5
+
+    def get_queryset(self):
+        queryset = Post.objects.filter().order_by("id")
+        return queryset
+    
 
 class PostUpdateView(UpdateView):
     model = Post
