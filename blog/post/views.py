@@ -23,6 +23,9 @@ class PostCreateView(CreateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
 class DashboardView(ListView):
     model = Post
@@ -77,6 +80,9 @@ class PostUpdateView(UpdateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
 class PostDeleteView(DeleteView):
     model = Post
