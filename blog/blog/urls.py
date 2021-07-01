@@ -25,4 +25,5 @@ urlpatterns = [
     path("category/", include(('category.urls'), namespace = "category")),
     path("post/", include(("post.urls"), namespace="post")),
     path("comments/", include(("comment.urls"), namespace="comments")),
+    path("user/", include(("userAuth.urls"), namespace="user")),
 ]
