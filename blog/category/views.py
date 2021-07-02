@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from category.forms import CategoryCreationForm, CategoryUpdationForm
 from category.models import Category
@@ -14,12 +15,13 @@ def create_category(request):
     if request.method == "POST":
         name = request.POST["name"]
         description = request.POST["description"]
-        created_by = request.POST["created_by"]
-        new_category = Category.objects.create(name = name, description = description, created_by = created_by)
-        return HttpResponseRedirect(reverse("category:create-category"))
+        created_by_id = request.POST["created_by"]
+        created_by_user_model = User.objects.get(id = created_by_id)
+        new_category = Category.objects.create(name = name, description = description, created_by = created_by_user_model)
+        return HttpResponseRedirect(reverse("category:manage-category"))
     else:
         context = {
-            'form': CategoryCreationForm(),
+            'form': CategoryCreationForm(request.user.id),
         }
         return render(request, "category/create-category.html", context)
 
@@ -28,7 +30,7 @@ def manage_category(request):
     """
     This view will show all the categories which is created by the user
     """
-    categories = Category.objects.all()
+    categories = Category.objects.filter(created_by = request.user.id)
     paginator = Paginator(categories, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -40,8 +42,12 @@ def delete_category(request, category_id):
     This view will delete the requested category object
     """
     requested_category = Category.objects.get(id= category_id)
-    requested_category.delete()
-    return HttpResponseRedirect(reverse("category:manage-category"))
+    if requested_category.created_by == request.user:
+        requested_category.delete()
+        return HttpResponseRedirect(reverse("category:manage-category"))
+    else:
+        return HttpResponseRedirect(reverse("category:manage-category"))
+    
 
 @login_required
 def update_category(request, category_id):
@@ -49,18 +55,22 @@ def update_category(request, category_id):
     This view will update the requested category
     """
     requested_category = Category.objects.get(id = category_id)
-    if (request.method == "POST"):
-        form = CategoryUpdationForm(request.POST, instance=requested_category)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse("category:manage-category"))
+    if requested_category.created_by == request.user:
+        if (request.method == "POST"):
+            form = CategoryUpdationForm(request.POST, instance=requested_category)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse("category:manage-category"))
+            else:
+                return HttpResponseRedirect(reverse("category:manage-category"))
         else:
-            return HttpResponseRedirect(reverse("category:manage-category"))
+            context = {
+                'form': CategoryUpdationForm(instance = requested_category),
+            }
+            return render(request, "category/update-category.html", context)
     else:
-        context = {
-            'form': CategoryUpdationForm(instance = requested_category),
-        }
-        return render(request, "category/update-category.html", context)
+        return HttpResponseRedirect(reverse("category:manage-category"))
+    
 
 def get_categories(request, pnum):
     if request.is_ajax():
