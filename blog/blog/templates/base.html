@@ -36,7 +36,7 @@
                 <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
                   class="nav-link-value"> Blogs</span>
               </a>
-              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./contact-me.html">
+              <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="{% url 'contact-me' %}">
                 <span class="nav-icons"><i class="bi bi-telephone-fill"></i></span> <span
                   class="nav-link-value"> Contact Me</span>
               </a>
@@ -81,15 +81,15 @@
       class="page-links-container col-8 col-md-6 d-flex flex-column align-items-center justify-content-center pt-2 pt-md-4 pt-md-5">
       <h2>Page Links</h2> <br>
       <p class="page-links-info">
-        <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="#">
+        <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="{% url 'index' %}">
           <span class="nav-icons"><i class="bi bi-person-square"></i></span> <span
             class="nav-link-value"> Portfolio</span>
         </a>
-        <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./blog.html">
+        <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="{% url 'post:dashboard' %}">
           <span class="nav-icons"><i class="bi bi-card-text"></i></span> <span
             class="nav-link-value"> Blogs</span>
         </a>
-        <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="./contact-me.html">
+        <a class="nav-link me-3 d-flex align-items-start justify-content-start" href="{% url 'contact-me' %}">
           <span class="nav-icons"><i class="bi bi-telephone-fill"></i></span> <span
             class="nav-link-value"> Contact Me</span>
         </a>

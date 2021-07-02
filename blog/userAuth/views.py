@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class CreateUser(CreateView):
     """
@@ -47,8 +48,8 @@ class LoginView(FormView):
     def form_invalid(self, form):
         return super().form_invalid(form)
 
-@login_required
-class ViewProfile(TemplateView):
+
+class ViewProfile(LoginRequiredMixin, TemplateView):
     """
     This is an template view for viewing user profile
     """

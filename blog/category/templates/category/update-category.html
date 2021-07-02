@@ -5,16 +5,13 @@
     <h3 class="mt-2 mb-4">Enter the following details to update the Category</h3>
     <form class="fs-5 mt-3 mb-3" method="POST" action="">
       {% csrf_token %}
+      {% for field in form %}
       <div class="form-floating mb-3">
-        {{ form.name }}
-        {{ form.name.label_tag }}
-        {{ form.name.errors }}
+          {{ field }}
+          {{ field.label_tag }} 
+          {{ field.errors }}
       </div>
-      <div class="form-floating mb-3">
-        {{ form.description }}
-        {{ form.description.label_tag }}
-        {{ form.description.errors }}
-      </div>
+      {% endfor %}
       <button type="submit" class="btn btn-success">Update Category</button>
     </form>
   </div>
