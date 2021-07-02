@@ -9,6 +9,7 @@ from comment.forms import AddCommentForm
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 import json
+from django.contrib.auth.decorators import login_required
 
 def get_comments_ajax(request, postID, pnum):
     """
@@ -33,6 +34,7 @@ def get_comments_ajax(request, postID, pnum):
     else:
         raise Http404("This type of get method is not allowed")
 
+@login_required
 def post_comment_ajax(request):
     """
     This view handles the post request for comment made using ajax method ONLY
@@ -49,6 +51,7 @@ def post_comment_ajax(request):
     else:
         raise Http404("This type of method is not allowed")
 
+@login_required
 def delete_comment(request, comment_id, post_id):
     """
     This view will delete the comments made by authenticated user

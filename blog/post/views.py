@@ -10,10 +10,12 @@ from category.models import Category
 from post.forms import PostCreationForm, PostUpdationForm
 from django.urls import reverse_lazy
 from comment.forms import AddCommentForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class PostCreateView(CreateView):
+
+class PostCreateView(LoginRequiredMixin, CreateView):
     """
-    This view will handle creation of +
+    This view will handle creation of new post
     """
     model = Post
     form_class = PostCreationForm
@@ -60,7 +62,7 @@ class PostDetailView(DetailView):
         return context
     
 
-class ManagePostListView(ListView):
+class ManagePostListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
@@ -71,7 +73,7 @@ class ManagePostListView(ListView):
         return queryset
     
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostUpdationForm
     template_name = "post/update-post.html"
@@ -84,7 +86,7 @@ class PostUpdateView(UpdateView):
     def form_invalid(self, form):
         return super().form_invalid(form)
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy("post:manage-post")
     

@@ -4,8 +4,9 @@ from category.models import Category
 from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required
 def create_category(request):
     """
     This view will to handle the creation of category objects
@@ -22,6 +23,7 @@ def create_category(request):
         }
         return render(request, "category/create-category.html", context)
 
+@login_required
 def manage_category(request):
     """
     This view will show all the categories which is created by the user
@@ -32,6 +34,7 @@ def manage_category(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'category/manage-category-list.html', {'page_obj': page_obj})
 
+@login_required
 def delete_category(request, category_id):
     """
     This view will delete the requested category object
@@ -40,6 +43,7 @@ def delete_category(request, category_id):
     requested_category.delete()
     return HttpResponseRedirect(reverse("category:manage-category"))
 
+@login_required
 def update_category(request, category_id):
     """
     This view will update the requested category

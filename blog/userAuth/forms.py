@@ -124,6 +124,31 @@ class UpdateProfileForm(UserChangeForm):
         }
 
 class ChangePasswordForm(PasswordChangeForm):
-    class Meta:
-        model = User
-        fields = "__all__"
+    old_password = forms.CharField(
+        label="Your Old password",
+        widget = forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'id' : 'old_password',
+            'name': 'old_password',
+            'placeholder': 'Enter your old Password',
+        })
+        )
+    new_password1 = forms.CharField(
+        label="Your New password",
+        widget = forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'id' : 'new_password1',
+            'name': 'new_password1',
+            'placeholder': 'Enter your New Password',
+        })
+        )
+    new_password2 = forms.CharField(
+        label="Re-type Password",
+        widget = forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'id' : 'new_password2',
+            'name': 'new_password2',
+            'placeholder': 'Re-type Password',
+        })
+        )
+    
