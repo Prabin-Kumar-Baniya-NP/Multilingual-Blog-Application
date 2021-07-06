@@ -46,6 +46,9 @@ class DashboardView(ListView):
         return context
     
 class PostDetailView(DetailView):
+    """
+    This view will show the requested post
+    """
     model = Post
     context_object_name = "post"
     template_name = "post/post.html"
@@ -64,6 +67,9 @@ class PostDetailView(DetailView):
     
 
 class ManagePostListView(LoginRequiredMixin, ListView):
+    """
+    This view will return the post owned by authenticated user
+    """
     model = Post
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
@@ -77,6 +83,9 @@ class ManagePostListView(LoginRequiredMixin, ListView):
         return queryset
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
+    """
+    This view will update the post owned by authenticated user
+    """
     model = Post
     form_class = PostUpdationForm
     template_name = "post/update-post.html"
@@ -93,6 +102,9 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_invalid(form)
 
 class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
+    """
+    This view will delete the post owned by authenticated user
+    """
     model = Post
     success_url = reverse_lazy("post:manage-post")
 
