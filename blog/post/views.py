@@ -1,8 +1,4 @@
-from django.contrib.auth.models import User
-from django.db.models import query
-from django.http import request
 from comment.models import Comment
-from django.db import models
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView 
