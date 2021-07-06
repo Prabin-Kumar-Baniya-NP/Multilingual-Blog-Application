@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.models import query
 from django.http import request
 from comment.models import Comment
@@ -10,8 +11,7 @@ from category.models import Category
 from post.forms import PostCreationForm, PostUpdationForm
 from django.urls import reverse_lazy
 from comment.forms import AddCommentForm
-from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     """
@@ -20,7 +20,12 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostCreationForm
     template_name = "post/create-post.html"
-    success_url = reverse_lazy("post:create-post")
+    success_url = reverse_lazy("post:manage-post")
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["requested_user_id"] = self.request.user.id
+        return kwargs
 
     def form_valid(self, form):
         form.save()
@@ -30,14 +35,14 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_invalid(form)
 
 class DashboardView(ListView):
+    """
+    This view will handle the dashboard page content list viewing.
+    """
     model = Post
     context_object_name = "posts"
     template_name = "post/blog.html"
     paginate_by = 5
-
-    def get_queryset(self):
-        queryset = Post.objects.filter().order_by("id")
-        return queryset
+    ordering = ['-last_updated']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,11 +72,13 @@ class ManagePostListView(LoginRequiredMixin, ListView):
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
     paginate_by = 5
+    ordering = ["-published_on"]
+
 
     def get_queryset(self):
-        queryset = Post.objects.filter().order_by("id")
+        queryset = super(ManagePostListView, self).get_queryset()
+        queryset = queryset.filter(author = self.request.user.id)
         return queryset
-    
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
@@ -79,6 +86,9 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "post/update-post.html"
     success_url = reverse_lazy("post:manage-post")
 
+    def get_queryset(self):
+        return super().get_queryset().filter(author = self.request.user)
+    
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
@@ -86,7 +96,10 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     def form_invalid(self, form):
         return super().form_invalid(form)
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy("post:manage-post")
+
+    def test_func(self):
+        return self.get_object().author == self.request.user
     
