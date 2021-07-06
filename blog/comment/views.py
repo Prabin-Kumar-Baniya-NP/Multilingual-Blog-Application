@@ -1,9 +1,8 @@
-from django import forms
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import JsonResponse
 from comment.models import Comment
-from django.http import Http404, HttpResponseBadRequest
+from django.http import Http404
 from django.core.paginator import Paginator
 from comment.forms import AddCommentForm
 from django.shortcuts import get_object_or_404
