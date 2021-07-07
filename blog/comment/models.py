@@ -10,7 +10,7 @@ class Comment(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
-    commented_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    commented_by = models.CharField(max_length=150)
 
     def __str__(self):
         return self.body

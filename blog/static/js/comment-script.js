@@ -79,10 +79,8 @@ async function getComments() {
         if (Object.keys(data).length === 0){
             loadCommentsbtn.style.display = "None"
         }else{
-            displayComments(data);
+            displayComments(data.commentsData);
         }
-        
-
     } catch (error) {
         console.log(error);
     }
@@ -132,6 +130,7 @@ async function postComment() {
         const response = await new_request.json();
         if (response.status == "success"){
             let commentObject = JSON.parse(formDataJSONString);
+            commentObject.commented_by = username;
             commentObject.likes = 0;
             commentObject.dislikes = 0;
             const commentArray = [commentObject];

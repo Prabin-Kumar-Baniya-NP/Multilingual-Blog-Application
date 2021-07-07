@@ -58,7 +58,7 @@ class PostDetailView(DetailView):
         context["form"] = AddCommentForm(
             initial={
                 'post': self.kwargs['pk'],
-                'commented_by': self.request.user
+                'commented_by': self.request.user.username
                 }
             )
         if self.request.user.is_authenticated:

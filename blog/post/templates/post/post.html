@@ -22,7 +22,8 @@
             <a href="#" class="vote-link fs-5 m-1"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>
                     {{ post.likes }}
                 </span></a>
-            <a href="#" class="vote-link fs-5 m-1"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>
+            <a href="#" class="vote-link fs-5 m-1"><span class="icon pt-1 downvote"><i
+                        class="bi bi-hand-thumbs-down"></i>
                     {{ post.dislikes }}
                 </span></a>
         </div>
@@ -31,19 +32,22 @@
             {% for comment in user_comments %}
             <div class="comment-item row mt-3 mb-3">
                 <div class="user-profile-image col-2 col-md-1 d-flex align-items-center justify-content-center">
-                  <i class="bi bi-person"></i>
+                    <i class="bi bi-person"></i>
                 </div>
                 <div class="username col-10 d-flex align-items-center justify-content-start">
-                  <b>{{ comment.commented_by }}</b>
+                    <b>{{ comment.commented_by }}</b>
                 </div>
                 <div class="comment offset-2 col-10 offset-md-1 col-md-11">
-                  {{ comment.body }}
+                    {{ comment.body }}
                 </div>
-      
+
                 <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                  <a href="#" class="vote-link m-1"><span class="icon upvote"><i class="bi bi-hand-thumbs-up"></i>0</span></a>
-                  <a href="#" class="vote-link m-1"><span class="icon downvote"><i class="bi bi-hand-thumbs-down"></i>0</span></a>
-                  <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#delete"><i class="bi bi-trash-fill"></i></span>
+                    <a href="#" class="vote-link m-1"><span class="icon upvote"><i
+                                class="bi bi-hand-thumbs-up"></i>0</span></a>
+                    <a href="#" class="vote-link m-1"><span class="icon downvote"><i
+                                class="bi bi-hand-thumbs-down"></i>0</span></a>
+                    <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#delete"><i
+                            class="bi bi-trash-fill"></i></span>
                 </div>
                 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
@@ -65,37 +69,41 @@
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
             {% endfor %}
         </div>
-       <div class="load-button text-center">
-        <button type="button" class="btn btn-dark" id="load-comments">Load More</button>
-       </div>
-
-       <form class="fs-5 mt-3 mb-3" id="new-comment">
-        <div class="form-floating mb-3">
-          {{ form.post }}
-          {{ form.post.label_tag }}
-          {{ form.post.errors }}
+        <div class="load-button text-center">
+            <button type="button" class="btn btn-dark" id="load-comments">Load More</button>
         </div>
-        <div class="form-floating mb-3">
-          {{ form.body }}
-          {{ form.body.label_tag }}
-          {{ form.body.errors }}
-        </div>
-        <div class="form-floating mb-3">
-            {{ form.commented_by }}
-            {{ form.commented_by.label_tag }}
-            {{ form.commented_by.errors }}
-          </div>
-          <div class="d-flex align-items-end justify-content-end">
-            <button type="button" id="form-submit-btn" class="btn btn-dark">Add Comment</button>
-          </div>
-      </form>
-      <script>
-          var postID = {{ post.id }}
-      </script>
-       <script src="{% static 'js/comment-script.js' %}"></script>
+        {% if request.user.is_authenticated %}
+        <form class="fs-5 mt-3 mb-3" id="new-comment">
+            <div class="form-floating mb-3">
+                {{ form.post }}
+                {{ form.post.label_tag }}
+                {{ form.post.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.body }}
+                {{ form.body.label_tag }}
+                {{ form.body.errors }}
+            </div>
+            <div class="form-floating mb-3">
+                {{ form.commented_by }}
+                {{ form.commented_by.label_tag }}
+                {{ form.commented_by.errors }}
+            </div>
+            <div class="d-flex align-items-end justify-content-end">
+                <button type="button" id="form-submit-btn" class="btn btn-dark">Add Comment</button>
+            </div>
+        </form>
+        <script>
+            var username = "{{ request.user.username }}"
+        </script>
+        {% endif %}
+        <script>
+            var postID = {{ post.id }}
+        </script>
+        <script src="{% static 'js/comment-script.js' %}"></script>
     </div>
 </div>
 {% endblock %}
