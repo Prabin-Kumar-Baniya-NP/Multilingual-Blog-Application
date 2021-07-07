@@ -24,8 +24,8 @@ def get_comments_ajax(request, postID, pnum):
         else:
             comments = Comment.objects.filter(
                 post=postID).order_by("id").values("body", "commented_on",
-                                                   "updated_on", "likes",
-                                                   "dislikes", "commented_by")
+                                                   "updated_on",
+                                                   "commented_by")
         p = Paginator(comments, 4)
         if (pnum in p.page_range):
             page_num = p.page(pnum)

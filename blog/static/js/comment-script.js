@@ -50,10 +50,12 @@ async function getComments() {
     try {
         const response = await fetch(getCommentsURL, params);
         const data = await response.json();
-        if (Object.keys(data).length === 0){
+        const commentsData = data.commentsData
+        if (Object.keys(commentsData).length === 0){
             loadCommentsbtn.style.display = "None"
+            document.querySelector(".comments-container").appendChild(document.createTextNode("No Comments Found"));
         }else{
-            displayComments(data.commentsData);
+            displayComments(commentsData);
         }
     } catch (error) {
         console.log(error);
