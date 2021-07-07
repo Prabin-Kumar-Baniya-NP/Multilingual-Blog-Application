@@ -18,15 +18,6 @@
         <div class="post-body mt-2 fs-5 lh-lg">
             {{ post.body }}
         </div>
-        <div class="post-votes m-1">
-            <a href="#" class="vote-link fs-5 m-1"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>
-                    {{ post.likes }}
-                </span></a>
-            <a href="#" class="vote-link fs-5 m-1"><span class="icon pt-1 downvote"><i
-                        class="bi bi-hand-thumbs-down"></i>
-                    {{ post.dislikes }}
-                </span></a>
-        </div>
         <div class="comments-container mt-5 p-2" id="post-comments-container">
             <h4>Comments</h4>
             {% for comment in user_comments %}
@@ -39,15 +30,6 @@
                 </div>
                 <div class="comment offset-2 col-10 offset-md-1 col-md-11">
                     {{ comment.body }}
-                </div>
-
-                <div class="user-comments-vote offset-2 col-10 offset-md-1 col-md-11">
-                    <a href="#" class="vote-link m-1"><span class="icon upvote"><i
-                                class="bi bi-hand-thumbs-up"></i>0</span></a>
-                    <a href="#" class="vote-link m-1"><span class="icon downvote"><i
-                                class="bi bi-hand-thumbs-down"></i>0</span></a>
-                    <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#delete"><i
-                            class="bi bi-trash-fill"></i></span>
                 </div>
                 <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">

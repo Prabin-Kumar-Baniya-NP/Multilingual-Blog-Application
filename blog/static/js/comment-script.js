@@ -29,32 +29,6 @@ function displayComments(data) {
         let divCommentVotes = document.createElement("div");
         divCommentVotes.classList.add("user-comments-vote", "offset-2", "col-10", "offset-md-1", "col-md-11")
 
-        let anchortagForLikes = document.createElement("a");
-        anchortagForLikes.href = "#";
-        anchortagForLikes.classList.add("vote-link", "m-1");
-        let spanTagForLikes = document.createElement("span");
-        spanTagForLikes.classList.add("icon", "upvote");
-        let iTagForLikes = document.createElement("i");
-        iTagForLikes.classList.add("bi", "bi-hand-thumbs-up");
-        spanTagForLikes.appendChild(iTagForLikes);
-        likesNumberTextNode = document.createTextNode(data[i].likes);
-        spanTagForLikes.appendChild(likesNumberTextNode);
-        anchortagForLikes.appendChild(spanTagForLikes);
-
-        let anchortagForDislikes = document.createElement("a");
-        anchortagForDislikes.href = "#";
-        anchortagForDislikes.classList.add("vote-link", "m-1");
-        let spanTagForDislikes = document.createElement("span");
-        spanTagForDislikes.classList.add("icon", "downvote");
-        let iTagForDislikes = document.createElement("i");
-        iTagForDislikes.classList.add("bi", "bi-hand-thumbs-down");
-        spanTagForDislikes.appendChild(iTagForDislikes);
-        dislikesNumberTextNode = document.createTextNode(data[i].likes);
-        spanTagForDislikes.appendChild(dislikesNumberTextNode);
-        anchortagForDislikes.appendChild(spanTagForDislikes);
-
-        divCommentVotes.appendChild(anchortagForLikes);
-        divCommentVotes.appendChild(anchortagForDislikes);
         divCommentItem.appendChild(divCommentVotes);
 
         commentsContainer.appendChild(divCommentItem);
@@ -131,8 +105,6 @@ async function postComment() {
         if (response.status == "success"){
             let commentObject = JSON.parse(formDataJSONString);
             commentObject.commented_by = username;
-            commentObject.likes = 0;
-            commentObject.dislikes = 0;
             const commentArray = [commentObject];
             displayComments(commentArray);
         }

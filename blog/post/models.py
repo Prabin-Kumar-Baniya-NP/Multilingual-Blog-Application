@@ -10,8 +10,6 @@ class Post(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     category = models.ManyToManyField(Category, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    likes = models.IntegerField(default=0, null=True, blank=True)
-    dislikes = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
         return self.title

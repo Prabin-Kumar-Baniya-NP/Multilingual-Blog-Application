@@ -1,6 +1,6 @@
 from comment.models import Comment
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView 
 from post.models import Post
 from category.models import Category
@@ -8,6 +8,7 @@ from post.forms import PostCreationForm, PostUpdationForm
 from django.urls import reverse_lazy
 from comment.forms import AddCommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     """
@@ -62,7 +63,7 @@ class PostDetailView(DetailView):
                 }
             )
         if self.request.user.is_authenticated:
-            context["user_comments"] = Comment.objects.filter(commented_by = self.request.user)
+            context["user_comments"] = Comment.objects.filter(post = self.kwargs["pk"], commented_by = self.request.user)
         return context
     
 
@@ -110,4 +111,3 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         return self.get_object().author == self.request.user
-    

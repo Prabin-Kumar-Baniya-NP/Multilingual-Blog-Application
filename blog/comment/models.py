@@ -8,8 +8,6 @@ class Comment(models.Model):
     body = models.TextField(max_length=1000)
     commented_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    likes = models.IntegerField(default=0)
-    dislikes = models.IntegerField(default=0)
     commented_by = models.CharField(max_length=150)
 
     def __str__(self):
