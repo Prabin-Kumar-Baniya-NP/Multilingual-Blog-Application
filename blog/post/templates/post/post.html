@@ -26,7 +26,9 @@
                     <i class="bi bi-person"></i>
                 </div>
                 <div class="username col-10 d-flex align-items-center justify-content-start">
-                    <b>{{ comment.commented_by }}</b>
+                    <b>{{ comment.commented_by }}</b> &nbsp; &nbsp;
+                    <span class="badge bg-danger" data-bs-toggle="modal" data-bs-target="#delete"><i
+                        class="bi bi-trash-fill"></i></span>
                 </div>
                 <div class="comment offset-2 col-10 offset-md-1 col-md-11">
                     {{ comment.body }}

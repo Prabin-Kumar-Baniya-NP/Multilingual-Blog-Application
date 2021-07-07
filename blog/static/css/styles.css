@@ -3,7 +3,6 @@ primary-background-color => #c8d8e4
 secondary-background-color => #f2f2f2
 primary-color => #2b6777
 secondary-color => #52ab98
-
 */
 body{
     margin: 0px;
@@ -107,18 +106,7 @@ footer{
 .blog-body{
     font-size: 18px;
 }
-.vote-link{
-    text-decoration: none;
-    color: black;
-}
-.vote-link:hover .upvote{
-    color: green;
-    font-weight: bold;
-}
-.vote-link:hover .downvote{
-    color: red;
-    font-weight: bold;
-}
+
 .post-image{
     border-radius: 10px;
 }

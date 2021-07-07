@@ -19,7 +19,7 @@ def get_comments_ajax(request, postID, pnum):
         if request.user.is_authenticated:
             comments = Comment.objects.filter(
                 post=postID).order_by("id").values(
-                    "body", "commented_on", "updated_on", "likes", "dislikes",
+                    "body", "commented_on", "updated_on",
                     "commented_by").exclude(commented_by=request.user)
         else:
             comments = Comment.objects.filter(
