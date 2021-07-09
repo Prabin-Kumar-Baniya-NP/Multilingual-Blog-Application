@@ -12,9 +12,11 @@
         <div class="updation-date text-muted m-1">
             Last updated {{ post.published_on|timesince:post.last_updated }} ago
         </div>
+        {% if post.image %}
         <div class="post-image mt-4">
-            <img src="./images/blog.jpg" width="100%" height="100%" class="post-image" loading="lazy">
+            <img src={{ post.image.url }} width="100%" height="100%" class="post-image" loading="lazy">
         </div>
+        {% endif %}
         <div class="post-body mt-2 fs-5 lh-lg">
             {{ post.body }}
         </div>

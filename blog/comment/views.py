@@ -62,7 +62,7 @@ def delete_comment(request, comment_id, post_id):
     """
     if request.user.is_authenticated:
         requested_comment = get_object_or_404(Comment, id=comment_id)
-        if requested_comment.commented_by == request.user:
+        if requested_comment.commented_by == request.user.username:
             requested_comment.delete()
             return HttpResponseRedirect(
                 reverse("post:view-post", kwargs={'pk': post_id}))

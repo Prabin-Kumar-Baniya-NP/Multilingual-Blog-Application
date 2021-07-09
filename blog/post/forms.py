@@ -12,7 +12,14 @@ class PostCreationForm(forms.ModelForm):
     
     class Meta:
         model = Post
-        fields = ["title", "body", "category", "author"]
+        fields = ["title", "body", "category", "author", "image"]
+        labels = {
+            'title': 'Post Title',
+            "body": "Post Body",
+            "category": "Choose Category",
+            "author": "Your Username",
+            "image": "Post Image"
+        }
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -32,12 +39,23 @@ class PostCreationForm(forms.ModelForm):
                 'id': "post-author",
                 'placeholder': "Enter your name",
             }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+                'id': "post-image",
+                'name': 'post-image'
+            })
         }
 
 class PostUpdationForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ["title", "body", "category"]
+        fields = ["title", "body", "category", "image"]
+        labels = {
+            'title': 'Post Title',
+            "body": "Post Body",
+            "category": "Choose Category",
+            "image": "Post Image"
+        }
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -52,5 +70,10 @@ class PostUpdationForm(forms.ModelForm):
             'category': forms.CheckboxSelectMultiple(attrs={
                 'class': "form-check-input",
             }),
+            'image': forms.ClearableFileInput(attrs={
+                'class': 'form-control',
+                'id': "post-image",
+                'name': 'post-image'
+            })
         }
 

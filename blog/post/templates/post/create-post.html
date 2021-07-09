@@ -3,7 +3,7 @@
 <div class="container form-container mt-5 mb-5">
   <div class="post-creation-form m-3 p-3">
     <h3 class="mt-2 mb-4">Enter the following details to create a new post</h3>
-    <form class="fs-5 mt-3 mb-3" method="POST" action="">
+    <form class="fs-5 mt-3 mb-3" method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="form-floating mb-3">
         {{ form.title }}
@@ -29,12 +29,13 @@
         {{ form.author.label_tag }}
         {{ form.author.errors }}
       </div>
+      <div class="mb-3">
+        {{ form.image.label_tag }}
+        {{ form.image }}
+        {{ form.image.errors }}
+      </div>
       <button type="submit" class="btn btn-success">Create Post</button>
     </form>
-    <div class="mb-3">
-      <label for="formFile" class="form-label">Post Image (Optional) </label>
-      <input class="form-control" type="file" id="formFile">
-    </div>
   </div>
 </div>
 {% endblock %}
