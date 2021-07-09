@@ -20,15 +20,7 @@
           <div class="card-text post-body">
             {{ post.body }}
           </div>
-          <div class="card-text d-flex justify-content-between">
-            <div class="post-votes mt-1">
-              <a href="#" class="vote-link fs-5"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>
-                  {{ post.likes }}
-                </span></a>
-              <a href="#" class="vote-link fs-5"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>
-                  {{ post.dislikes }}
-                </span></a>
-            </div>
+          <div class="card-text d-flex justify-content-end ">
             <div class="manage-post mt-1">
               <a href="{% url 'post:update-post' post.id %}" class="btn btn-warning">Update</a>
               <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>

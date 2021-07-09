@@ -48,11 +48,7 @@
                             <div class="card-text post-body">
                                 {{ post.body }}
                             </div>
-                            <div class="card-text d-flex justify-content-between">
-                                <div class="post-votes mt-1">
-                                    <a href="#" class="vote-link"><span class="icon pt-1 upvote"><i class="bi bi-hand-thumbs-up"></i>{{ post.likes }}</span></a>
-                                    <a href="#" class="vote-link"><span class="icon pt-1 downvote"><i class="bi bi-hand-thumbs-down"></i>{{ post.dislikes }}</span></a>
-                                </div>
+                            <div class="card-text d-flex justify-content-end">
                                 <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.id %}">Click Here To Read</a></span>
                             </div>
                         </div>

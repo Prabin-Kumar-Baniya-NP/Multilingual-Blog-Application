@@ -53,7 +53,7 @@ async function getComments() {
         const commentsData = data.commentsData
         if (Object.keys(commentsData).length === 0){
             loadCommentsbtn.style.display = "None"
-            document.querySelector(".comments-container").appendChild(document.createTextNode("No Comments Found"));
+            document.querySelector(".comments-container").appendChild(document.createTextNode("No Other Comments Found"));
         }else{
             displayComments(commentsData);
         }
