@@ -130,3 +130,10 @@ dmypy.json
 
 # Virtual Environment
 blog-env
+
+# Static and media directory
+static/
+media/
+
+# VS Code 
+.vscode/
