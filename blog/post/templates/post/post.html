@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load tz %}
 {% block content %}
 <div class="container mt-5">
     <div class="post-container mt-2 mb-3 p-3">
         <div class="title">
             <p class="fs-3 fw-bold">{{ post.title }}</p>
         </div>
+        {% timezone "Asia/Kathmandu" %}
         <div class="publication-date m-1">
-            {{ post.published_on }}
+            Published on {{ post.published_on }}
         </div>
         <div class="updation-date text-muted m-1">
-            Last updated {{ post.published_on|timesince:post.last_updated }} ago
+            Last updated on {{ post.last_updated }}
         </div>
+        {% endtimezone %}
         {% if post.image %}
         <div class="post-image mt-4">
             <img src={{ post.image.url }} width="100%" height="100%" class="post-image" loading="lazy">

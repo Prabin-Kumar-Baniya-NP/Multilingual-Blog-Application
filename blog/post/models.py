@@ -1,7 +1,7 @@
 from django.db import models
 from category.models import Category
 from django.contrib.auth.models import User
-import os
+
 
 class Post(models.Model):
     title = models.CharField(max_length=126)

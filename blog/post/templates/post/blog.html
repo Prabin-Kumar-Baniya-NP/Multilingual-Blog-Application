@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load tz %}
 {% block content %}
     <div class="dashboard fs-5 row ms-0 me-2 mt-1 m-md-2 m-lg-3">
         <div class="sidebar col-12 col-lg-2 m-2 p-3">
@@ -43,7 +44,9 @@
                         <div class="card-body">
                             <div class="header row">
                                 <div class="card-title fw-bold fs-5 col-12 col-md-auto">{{ post.title }}</div>
-                                <small class="text-muted col-12 col-md-auto mt-0 mt-md-1"> Last updated {{ post.published_on|timesince:post.last_updated }} ago</small>
+                                {% timezone "Asia/Kathmandu" %}
+                                <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">  {{ post.published_on|date:"d M, Y" }}</small>
+                                {% endtimezone %}
                             </div>
                             <div class="card-text post-body">
                                 {{ post.body }}

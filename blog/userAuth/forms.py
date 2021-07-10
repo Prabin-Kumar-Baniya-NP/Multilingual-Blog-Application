@@ -95,6 +95,7 @@ class UpdateProfileForm(UserChangeForm):
             'username' : "Your Username",
             'first_name' : "Your First Name",
             'last_name': "Your Last Name",
+            'password1': "",
         }
         widgets = {
             'username': forms.TextInput(attrs={
