@@ -132,7 +132,8 @@ dmypy.json
 blog-env
 
 # Static and media directory
-static/
+bootstrap/
+bootstrap-icons/
 media/
 
 # VS Code 
