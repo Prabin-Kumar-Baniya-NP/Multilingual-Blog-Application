@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+from post.models import Post
 
 @login_required
 def create_category(request):
@@ -84,3 +85,10 @@ def get_categories(request, pnum):
             return JsonResponse({}, safe=False)
     else:
         raise Http404("This type of get method is not allowed")
+
+def get_posts_by_category(request, categoryID):
+    post_list = Post.objects.filter(category = categoryID).order_by("-published_on")
+    paginator = Paginator(post_list, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, "category/category-post.html", {"page_obj": page_obj})
