@@ -7,6 +7,7 @@ class PostAdmin(admin.ModelAdmin):
     exclude = ("status",)
     list_display = ("title", "author", "status", "published_on")
     list_filter = ("status", "published_on")
+    search_fields = ("title", "author__username")
 
     def approve(modeladmin, request, queryset):
         queryset.update(status = "A")
