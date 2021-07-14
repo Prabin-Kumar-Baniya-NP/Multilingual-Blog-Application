@@ -1,11 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
 from post.models import Post
+from category.models import Category
 
 class PostCreationForm(forms.ModelForm):
     def __init__(self, requested_user_id, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['author'].queryset = User.objects.filter(id = requested_user_id)
+        self.fields["category"].queryset = Category.objects.filter(status = "A")
         self.fields['author'].initial = User.objects.get(id = requested_user_id)
         self.fields['author'].widget = forms.HiddenInput()
         self.fields['author'].label = ""
@@ -47,6 +49,10 @@ class PostCreationForm(forms.ModelForm):
         }
 
 class PostUpdationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["category"].queryset = Category.objects.filter(status = "A")
+    
     class Meta:
         model = Post
         fields = ["title", "body", "category", "image"]

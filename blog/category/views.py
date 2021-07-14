@@ -21,7 +21,7 @@ def create_category(request):
             created_by_id = request.POST["created_by"]
             created_by_user_model = User.objects.get(id = created_by_id)
             new_category = Category.objects.create(name = name, description = description, created_by = created_by_user_model)
-            messages.success(request, f"{new_category} Category created successfully")
+            messages.success(request, f"{new_category} Category created successfully and Sent for Approval")
             return HttpResponseRedirect(reverse("category:manage-category"))
         except:
             messages.error(request, "Unable to Create Category ! Please Enter Valid Data")

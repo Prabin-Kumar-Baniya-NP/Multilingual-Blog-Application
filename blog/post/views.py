@@ -20,7 +20,7 @@ class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     form_class = PostCreationForm
     template_name = "post/create-post.html"
     success_url = reverse_lazy("post:manage-post")
-    success_message = "%(title)s Post Created Successfully"
+    success_message = "%(title)s Post Created Successfully and Sent for Approval"
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -42,13 +42,16 @@ class DashboardView(ListView):
     model = Post
     context_object_name = "posts"
     template_name = "post/blog.html"
-    paginate_by = 5
     ordering = ['-last_updated']
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all().order_by("id").values("id", "name")[:4]
+        context["categories"] = Category.objects.filter(status = "A").order_by("id").values("id", "name")[:4]
         return context
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(status = "A")
     
 class PostDetailView(DetailView):
     """
