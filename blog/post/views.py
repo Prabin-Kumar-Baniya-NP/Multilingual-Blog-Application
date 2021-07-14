@@ -9,8 +9,10 @@ from django.urls import reverse_lazy
 from comment.forms import AddCommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 
-class PostCreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """
     This view will handle creation of new post
     """
@@ -18,6 +20,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     form_class = PostCreationForm
     template_name = "post/create-post.html"
     success_url = reverse_lazy("post:manage-post")
+    success_message = "%(title)s Post Created Successfully"
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -29,6 +32,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def form_invalid(self, form):
+        messages.add_message(self.request, messages.error, "Please Enter Valid Data")
         return super().form_invalid(form)
 
 class DashboardView(ListView):
@@ -83,7 +87,7 @@ class ManagePostListView(LoginRequiredMixin, ListView):
         queryset = queryset.filter(author = self.request.user.id)
         return queryset
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """
     This view will update the post owned by authenticated user
     """
@@ -91,6 +95,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     form_class = PostUpdationForm
     template_name = "post/update-post.html"
     success_url = reverse_lazy("post:manage-post")
+    success_message = "%(title)s Post Updated Successfully"
 
     def get_queryset(self):
         return super().get_queryset().filter(author = self.request.user)
@@ -100,6 +105,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
     
     def form_invalid(self, form):
+        messages.add_message(self.request, messages.error, "Please Enter Valid Data")
         return super().form_invalid(form)
 
 class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):

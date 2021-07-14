@@ -11,8 +11,10 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 
-class CreateUser(CreateView):
+class CreateUser(SuccessMessageMixin, CreateView):
     """
     This view will handle the creation of user
     """
@@ -20,15 +22,17 @@ class CreateUser(CreateView):
     form_class = SignUpForm
     template_name = "userAuth/signup.html"
     success_url = reverse_lazy("post:dashboard")
+    success_message = "%(username)s user created successfully"
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
 
     def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Invalid Data Submitted ! Please Enter Valid Data")
         return super().form_invalid(form)
 
-class LoginView(FormView):
+class LoginView(SuccessMessageMixin, FormView):
     """
     This view will handle the login system of user
     """
@@ -36,6 +40,7 @@ class LoginView(FormView):
     form_class = LoginForm
     template_name = "userAuth/login.html"
     success_url = reverse_lazy("post:dashboard")
+    success_message = "Logged In Successfully"
 
     def form_valid(self, form):
         username = self.request.POST["username"]
@@ -43,9 +48,13 @@ class LoginView(FormView):
         user = authenticate(self.request, username = username, password = password)
         if user is not None:
             login(self.request, user)
-        return super().form_valid(form)
+            return super().form_valid(form)
+        else:
+            messages.add_message(self.request, messages.ERROR, "User does not exist in the database")
+            return HttpResponseRedirect(reverse("user:login"))
     
     def form_invalid(self, form):
+        messages.add_message(self.request, messages.ERROR, "Please enter correct username and password")
         return super().form_invalid(form)
 
 
@@ -61,6 +70,7 @@ def logout_view(request):
     This view will log out the current user
     """
     logout(request)
+    messages.success(request, "Logged out Successfully")
     return HttpResponseRedirect(reverse("post:dashboard"))
 
 @login_required
@@ -72,8 +82,10 @@ def update_profile(request):
         form = UpdateProfileForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, "Profile Updated Successfully")
             return HttpResponseRedirect(reverse("user:view-profile"))
         else:
+            messages.error(request, "Invalid Data Submitted ! Please Enter Valid Data")
             return HttpResponseRedirect(reverse("user:update-profile"))
     else:
         context = {
@@ -89,13 +101,13 @@ def change_password(request):
     if request.method == "POST":
         form = ChangePasswordForm(request.user, request.POST)
         if form.is_valid():
-            updated_user = form.save()
-            update_session_auth_hash(request, updated_user)
-            print("Form Valid")
-            return HttpResponseRedirect(reverse("user:view-profile"))
+                updated_user = form.save()
+                update_session_auth_hash(request, updated_user)
+                messages.success(request, "Password Changed Successfully")
+                return HttpResponseRedirect(reverse("user:view-profile"))
         else:
-            print("Form Invalid")
-            return ChangePasswordForm(reverse("user:change-password"))
+            messages.error(request, "Unable to change password ! Please Enter Valid Password")
+            return HttpResponseRedirect(reverse("user:change-password"))
     else:
         context = {
             'form' : ChangePasswordForm(request.user)

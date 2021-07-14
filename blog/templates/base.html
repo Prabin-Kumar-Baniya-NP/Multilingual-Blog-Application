@@ -59,6 +59,14 @@
           </div>
         </div>
       </nav>
+      {% if messages %}
+        <ul class="messages fw-bold fs-5 text-center mt-2">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+      {% endif %}
+  
     {% block content %}
 
     {% endblock %}
