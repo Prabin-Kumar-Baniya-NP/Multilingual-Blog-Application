@@ -123,4 +123,9 @@ class PostViewTest(TestCase):
         response = self.c.post(reverse("post:delete-post", kwargs={"pk": self.post2.id}))
         self.assertEqual(response.status_code, 403)
         
-        
+    def test_manage_post_listview(self):
+        self.c.login(username = "test_user1", password = "abcde@12345")
+        response = self.c.get(reverse("post:manage-post"))
+        self.assertEqual(response.status_code, 200)
+        posts_queryset = Post.objects.filter(author = self.post1.id)
+        self.assertQuerysetEqual(response.context["posts"], posts_queryset)
