@@ -107,7 +107,8 @@ def update_category(request, category_id):
     
 
 def get_categories(request, pnum):
-    if request.is_ajax():
+    is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+    if is_ajax:
         categories  = Category.objects.filter().order_by("id").values("id", "name")
         p = Paginator(categories, 4)
         if (pnum in p.page_range):
