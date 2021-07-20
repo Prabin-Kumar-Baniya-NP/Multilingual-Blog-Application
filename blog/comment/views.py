@@ -43,16 +43,16 @@ def post_comment_ajax(request):
     is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
     if request.method == "POST" and is_ajax == True:
         try:
-            body_unicode = request.body.decode('utf-8')
-            form_data = json.loads(body_unicode)
+            form_data = json.loads(request.body)
             new_comment = AddCommentForm(form_data)
             if new_comment.is_valid():
                 new_comment.save()
-                return JsonResponse({'status': 'success'})
+                return JsonResponse({"status": "success"})
             else:
                 raise Http404("Invalid Data!")
-        except:
-            raise Http404("Invalid Data!")
+        except Exception as e:
+            print(e)
+            raise Http404(e)
     else:
         raise Http404("This type of method is not allowed")
 

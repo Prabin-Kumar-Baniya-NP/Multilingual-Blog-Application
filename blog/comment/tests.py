@@ -1,3 +1,5 @@
+from json import encoder
+from json.encoder import JSONEncoder
 from comment.models import Comment
 from django.test import TestCase
 from django.test import Client
@@ -144,18 +146,15 @@ class TestCommentView(TestCase):
         Tests the post comment ajax view
         """
         self.c.login(username="test_user11", password="abcde@12345")
+        json_post_data = json.dumps({
+            "post": self.post11.id,
+            "body": "very very nice post",
+            "commented_by": self.user11.username,
+        })
         response = self.c.post(
             reverse("comments:post-comment"),
-            data={
-                "post": self.post11.id,
-                "body": "very very nice post",
-                "commented_by": self.user11.username,
-            },
-            header={
-                "Content-Type": "application/json",
-                "charset": "utf-8"
-            },
-            HTTP_X_REQUESTED_WITH = 'XMLHttpRequest',
+            json_post_data,
+            content_type='JSON_CONTENT',
+            HTTP_X_REQUESTED_WITH='XMLHttpRequest',
         )
-        print(response.content)
         self.assertEqual(response.status_code, 200)
