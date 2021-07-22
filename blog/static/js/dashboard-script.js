@@ -1,7 +1,6 @@
 let pagination_num = 2;
 async function getCategories() {
-    const domainName = "http://127.0.0.1:8000/"
-    const url = domainName + 'category/get-categories/' + pagination_num;
+    const url = '/category/get-categories/' + pagination_num;
     pagination_num = pagination_num + 1;
 
     const params = {
@@ -21,7 +20,10 @@ async function getCategories() {
             li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-start");
             let div = document.createElement("div");
             div.classList.add("ms-2", "me-auto");
-            div.innerText = data[i].name;
+            let anchorTag = document.createElement("a")
+            anchorTag.href = "/category/category-posts/" + data[i].name;
+            anchorTag.innerText = data[i].name;
+            div.appendChild(anchorTag);
             li.appendChild(div);
             ul.appendChild(li);
         }

@@ -109,7 +109,7 @@ def update_category(request, category_id):
 def get_categories(request, pnum):
     is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
     if is_ajax:
-        categories  = Category.objects.filter().order_by("id").values("id", "name")
+        categories  = Category.objects.filter(status = "A").order_by("id").values("id", "name")
         p = Paginator(categories, 4)
         if (pnum in p.page_range):
             page_num = p.page(pnum)
@@ -120,9 +120,10 @@ def get_categories(request, pnum):
     else:
         raise Http404("This type of get method is not allowed")
 
-def get_posts_by_category(request, categoryID):
+def get_posts_by_category(request, category_name):
     try:
-        post_list = Post.objects.filter(category = categoryID).order_by("-published_on")
+        requested_category = Category.objects.get(name = category_name)
+        post_list = Post.objects.filter(category = requested_category).order_by("-published_on")
     except Post.DoesNotExist:
         messages.warning(request, "Requested Category doesn't exists in the database")
         return HttpResponseRedirect(reverse("post:dashboard"))

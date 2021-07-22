@@ -1,5 +1,4 @@
 let pnum = 0;
-const domainName = "http://127.0.0.1:8000/"
 
 function displayComments(data) {
     commentsContainer = document.getElementById("post-comments-container");
@@ -37,7 +36,7 @@ function displayComments(data) {
 
 async function getComments() {
     pnum = pnum + 1;
-    const getCommentsURL = domainName + 'comments/get-comments/' + postID + '/' + pnum;
+    const getCommentsURL ='/comments/get-comments/' + postID + '/' + pnum;
 
     const params = {
         method: 'GET',
@@ -88,7 +87,7 @@ async function postComment() {
     const plainFormData = Object.fromEntries((formData.entries()));
     const formDataJSONString = JSON.stringify(plainFormData);
     const csrftoken = getCookie('csrftoken');
-    const postCommentURL = domainName + 'comments/post-comment/'
+    const postCommentURL = '/comments/post-comment/'
 
     const params = {
         method: 'POST',
