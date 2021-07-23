@@ -44,9 +44,9 @@
                         <div class="card-body">
                             <div class="header row">
                                 <div class="card-title fw-bold fs-5 col-12 col-md-auto">{{ post.title }}</div>
-                                {% timezone "Asia/Kathmandu" %}
+                                {% localtime on %}
                                 <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">  {{ post.published_on|date:"d M, Y" }}</small>
-                                {% endtimezone %}
+                                {% endlocaltime %}
                             </div>
                             <div class="card-text post-body">
                                 {{ post.body }}
