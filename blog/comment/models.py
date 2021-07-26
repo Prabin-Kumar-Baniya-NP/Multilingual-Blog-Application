@@ -10,5 +10,10 @@ class Comment(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     commented_by = models.CharField(max_length=150)
 
+    class Meta:
+        db_table = "Comment"
+        verbose_name = "Comment"
+        verbose_name_plural = "Comments"
+    
     def __str__(self):
         return self.body

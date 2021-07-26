@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 10:45+0545\n"
+"POT-Creation-Date: 2021-07-26 19:18+0545\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,43 @@ msgstr ""
 
 #: blog/settings.py:115
 msgid "English"
-msgstr ""
+msgstr "अंग्रेजी"
 
 #: blog/settings.py:116
 msgid "Nepali"
-msgstr ""
+msgstr "नेपाली"
+
+#: category/models.py:12
+msgid "Category Name"
+msgstr "श्रेणी नाम"
+
+#: category/models.py:13
+msgid "Category Description"
+msgstr "श्रेणी वर्णन"
+
+#: category/models.py:14
+msgid "Created On"
+msgstr "सिर्जना गरिएको"
+
+#: category/models.py:15
+msgid "Last Updated On"
+msgstr "अन्तिम अपडेट गरिएको"
+
+#: category/models.py:16
+msgid "Created By"
+msgstr "द्वारा बनाईएको"
+
+#: category/models.py:17
+msgid "Category Status"
+msgstr "श्रेणी स्थिति"
+
+#: category/models.py:21
+msgid "Category"
+msgstr "श्रेणी"
+
+#: category/models.py:22
+msgid "Categories"
+msgstr "श्रेणीहरू"
 
 #: templates/admin/base.html:42
 msgid "Welcome,"
@@ -36,15 +68,15 @@ msgstr "साइट हेर्नुहोस्"
 
 #: templates/admin/base.html:52
 msgid "Documentation"
-msgstr ""
+msgstr "कागजात"
 
 #: templates/admin/base.html:56
 msgid "Change password"
-msgstr ""
+msgstr "पासवर्ड परिवर्तन"
 
 #: templates/admin/base.html:58
 msgid "Log out"
-msgstr ""
+msgstr "लगआउट"
 
 #: templates/admin/base.html:68
 msgid "Home"
@@ -54,15 +86,15 @@ msgstr ""
 msgid "Prabin Kumar Baniya"
 msgstr "प्रवीण कुमार बनिया"
 
-#: templates/base.html:34 templates/base.html:115
+#: templates/base.html:34 templates/base.html:119
 msgid "Portfolio"
 msgstr "पोर्टफोलियो"
 
-#: templates/base.html:38 templates/base.html:119
+#: templates/base.html:38 templates/base.html:123
 msgid "Blogs"
 msgstr "ब्लगहरू"
 
-#: templates/base.html:42 templates/base.html:123
+#: templates/base.html:42 templates/base.html:127
 msgid "Contact Me"
 msgstr "सम्पर्क गर्नुस्"
 
@@ -70,14 +102,14 @@ msgstr "सम्पर्क गर्नुस्"
 msgid "My Profile"
 msgstr "मेरो प्रोफाइल"
 
-#: templates/base.html:97
+#: templates/base.html:101
 msgid "Facebook"
 msgstr "फेसबुक"
 
-#: templates/base.html:101
+#: templates/base.html:105
 msgid "Instagram"
 msgstr "इन्स्टाग्राम"
 
-#: templates/base.html:105
+#: templates/base.html:109
 msgid "Linkedin"
 msgstr "लिंक्डिन"

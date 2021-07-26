@@ -19,5 +19,10 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Author Username")
     status = models.CharField("Post Status", max_length=1, choices=POST_STATUS_CHOICES, default='P')
 
+    class Meta:
+        db_table = "Post"
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
+
     def __str__(self):
         return self.title

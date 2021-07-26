@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-23 10:45+0545\n"
+"POT-Creation-Date: 2021-07-26 19:18+0545\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,38 @@ msgstr ""
 
 #: blog/settings.py:116
 msgid "Nepali"
+msgstr ""
+
+#: category/models.py:12
+msgid "Category Name"
+msgstr ""
+
+#: category/models.py:13
+msgid "Category Description"
+msgstr ""
+
+#: category/models.py:14
+msgid "Created On"
+msgstr ""
+
+#: category/models.py:15
+msgid "Last Updated On"
+msgstr ""
+
+#: category/models.py:16
+msgid "Created By"
+msgstr ""
+
+#: category/models.py:17
+msgid "Category Status"
+msgstr ""
+
+#: category/models.py:21
+msgid "Category"
+msgstr ""
+
+#: category/models.py:22
+msgid "Categories"
 msgstr ""
 
 #: templates/admin/base.html:42
@@ -54,15 +86,15 @@ msgstr ""
 msgid "Prabin Kumar Baniya"
 msgstr ""
 
-#: templates/base.html:34 templates/base.html:115
+#: templates/base.html:34 templates/base.html:119
 msgid "Portfolio"
 msgstr ""
 
-#: templates/base.html:38 templates/base.html:119
+#: templates/base.html:38 templates/base.html:123
 msgid "Blogs"
 msgstr ""
 
-#: templates/base.html:42 templates/base.html:123
+#: templates/base.html:42 templates/base.html:127
 msgid "Contact Me"
 msgstr ""
 
@@ -70,14 +102,14 @@ msgstr ""
 msgid "My Profile"
 msgstr ""
 
-#: templates/base.html:97
+#: templates/base.html:101
 msgid "Facebook"
 msgstr ""
 
-#: templates/base.html:101
+#: templates/base.html:105
 msgid "Instagram"
 msgstr ""
 
-#: templates/base.html:105
+#: templates/base.html:109
 msgid "Linkedin"
 msgstr ""
