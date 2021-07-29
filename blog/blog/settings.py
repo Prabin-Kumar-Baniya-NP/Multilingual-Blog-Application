@@ -81,9 +81,16 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {}
-
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd80d50maua4q1l',
+        'USER': 'izsbgkygtdnfyb',
+        'PASSWORD': 'e2edaa36dad0c7a971ef5ff2c1c3b0c9568588b637db2f7d19c87dfd60ac8cee',
+        'HOST': 'ec2-54-164-241-193.compute-1.amazonaws.com',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
