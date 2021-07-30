@@ -129,7 +129,7 @@ dmypy.json
 blog-env
 
 # Static and media directory
-postImages
+
 
 # VS Code 
 .vscode/

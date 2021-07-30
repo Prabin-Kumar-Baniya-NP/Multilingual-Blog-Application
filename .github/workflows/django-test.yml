@@ -35,9 +35,9 @@ jobs:
       working-directory: ./blog
       run: |
         pip install coverage
-        coverage run manage.py test --keepdb
+        coverage run manage.py test
         coverage report
     - name: Django Test
       working-directory: ./blog
       run: |
-        python3 manage.py test --keepdb
+        python3 manage.py test
