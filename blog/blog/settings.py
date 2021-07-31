@@ -90,10 +90,10 @@ if 'test' in sys.argv:
 else:
     DATABASES['default'] = {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dfe6ovq4gnbffm',
-            'USER': 'rgvtbxfqrhmppv',
-            'PASSWORD': 'ae1e3f60c382e9b74583f094ffc3fc3b5772b4d15363bd7f771c48873c7aa1d8',
-            'HOST': 'ec2-54-83-82-187.compute-1.amazonaws.com',
+            'NAME': 'cchqmdin',
+            'USER': 'cchqmdin',
+            'PASSWORD': '5XECQFXpWLj_1lrHLa0AU3KKL0qPfSNh',
+            'HOST': 'chunee.db.elephantsql.com',
             'PORT': '5432',
         }
        
