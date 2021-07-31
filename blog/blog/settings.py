@@ -90,10 +90,10 @@ if 'test' in sys.argv:
 else:
     DATABASES['default'] = {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd80d50maua4q1l',
-            'USER': 'izsbgkygtdnfyb',
-            'PASSWORD': 'e2edaa36dad0c7a971ef5ff2c1c3b0c9568588b637db2f7d19c87dfd60ac8cee',
-            'HOST': 'ec2-54-164-241-193.compute-1.amazonaws.com',
+            'NAME': 'dfe6ovq4gnbffm',
+            'USER': 'rgvtbxfqrhmppv',
+            'PASSWORD': 'ae1e3f60c382e9b74583f094ffc3fc3b5772b4d15363bd7f771c48873c7aa1d8',
+            'HOST': 'ec2-54-83-82-187.compute-1.amazonaws.com',
             'PORT': '5432',
         }
        
