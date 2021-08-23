@@ -9,4 +9,5 @@ urlpatterns = [
     path("manage-post/", views.ManagePostListView.as_view(), name="manage-post"),
     path("update-post/<int:pk>/", views.PostUpdateView.as_view(), name="update-post"),
     path("delete-post/<int:pk>/", views.PostDeleteView.as_view(), name="delete-post"),
+    path('search-post/',views.SearchPost.as_view(), name="search-post")
 ]

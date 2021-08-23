@@ -1,96 +1,104 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load tz %}
-{% block content %}
-    <div class="dashboard fs-5 row ms-0 me-2 mt-1 m-md-2 m-lg-3">
-        <div class="sidebar col-12 col-lg-2 m-2 p-3">
-            <h5 class="m-3">Browse By Category</h5>
-            <ul class="list-group m-2">
-                {% for category in categories %}
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <a href="{% url 'category:category-posts' category.name %}">{{ category.name }}</a>
-                    </div>
-                </li>
-                {% endfor %}
-            </ul>
-            <p class="text-center">
-                <a href="#" class="btn btn-dark mt-1 mb-1" id="load-more">Load More</a> <br>
-                <a href="{% url 'category:create-category' %}" class="btn btn-success mt-1 mb-1">Create Category</a>
-                <a href="{% url 'category:manage-category' %}" class="btn btn-warning mt-1 mb-1">Manage Category</a>
-            </p>
+{% extends 'base.html' %} {% load static %} {% load tz %} {% block content %}
+<div class="dashboard fs-5 row ms-0 me-2 mt-1 m-md-2 m-lg-3">
+    <div class="sidebar col-12 col-lg-2 m-2 p-3">
+        <h5 class="m-3">Browse By Category</h5>
+        <ul class="list-group m-2">
+            {% for category in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <a href="{% url 'category:category-posts' category.name %}">{{ category.name }}</a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <p class="text-center">
+            <a href="#" class="btn btn-dark mt-1 mb-1" id="load-more">Load More</a>
+            <br />
+            <a href="{% url 'category:create-category' %}" class="btn btn-success mt-1 mb-1">Create Category</a>
+            <a href="{% url 'category:manage-category' %}" class="btn btn-warning mt-1 mb-1">Manage Category</a>
+        </p>
+    </div>
+    <div class="main-body col-12 col-lg-9 m-2 p-3">
+        <div class="blog-actions col-12 row align-items-center m-1 pt-3 pb-3">
+            <div class="col-12 col-md-6">
+                <form class="d-flex flex-nowrap" method="GET" action="{% url 'post:search-post' %}">
+                    <input type="text" id="search-post" name = "post-title" class="form-control pt-2 pb-2 ps-3 pe-3"
+                        placeholder="Enter Blog Title" />
+                    <input type="submit" class="btn btn-dark mt-2 mb-2 ms-1 me-1" value="Search" />
+                </form>
+            </div>
+            <div class="
+          col-12 col-md-6
+          d-flex
+          flex-row flex-wrap
+          justify-content-center
+          align-items-center
+          justify-content-md-start
+          align-items-md-start
+        ">
+                <a href="{% url 'post:create-post' %}" class="btn btn-success mt-2 mb-2 ms-1 me-1">Create Post</a>
+                <a href="{% url 'post:manage-post' %}" class="btn btn-warning mt-2 mb-2 ms-1 me-1">Manage Post</a>
+            </div>
         </div>
-        <div class="main-body col-12 col-lg-9 m-2 p-3">
-            <div class="blog-actions col-12 row align-items-center m-1 pt-3 pb-3">
-                <div class="col-12 col-md-6">
-                    <input type="text" id="search-post" class="form-control pt-2 pb-2 ps-3 pe-3"
-                        placeholder="Enter Blog Title">
-                </div>
-                <div
-                    class="col-12 col-md-6 d-flex flex-row flex-wrap justify-content-center align-items-center justify-content-md-start align-items-md-start">
-                    <input type="submit" class="btn btn-dark mt-2 mb-2 ms-1 me-1" value="Search">
-                    <a href="{% url 'post:create-post' %}" class="btn btn-success mt-2 mb-2 ms-1 me-1">Create Post</a>
-                    <a href="{% url 'post:manage-post' %}" class="btn btn-warning mt-2 mb-2 ms-1 me-1">Manage Post</a>
-                </div>
+        <div class="blog-container col-12 m-1 pt-3 pb-3">
+            {% if page_obj %}
+            <div class="blog-type-title fs-4 p-1 p-md-2">
+                <h5 class="text-center">Here is the Latest Blogs</h5>
             </div>
-            <div class="blog-container col-12 m-1 pt-3 pb-3">
-                {% if page_obj %}
-                <div class="blog-type-title fs-4 p-1 p-md-2">
-                    <h5 class="text-center">Here is the Latest Blogs</h5>
-                </div>
-                <div class="blog-collections">
-                    {% for post in page_obj %}
-                    <div class="card text-dark bg-light mb-3">
-                        <div class="card-body">
-                            <div class="header row">
-                                <div class="card-title fw-bold fs-5 col-12 col-md-auto">{{ post.title }}</div>
-                                {% localtime on %}
-                                <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">  {{ post.published_on|date:"d M, Y" }}</small>
-                                {% endlocaltime %}
+            <div class="blog-collections">
+                {% for post in page_obj %}
+                <div class="card text-dark bg-light mb-3">
+                    <div class="card-body">
+                        <div class="header row">
+                            <div class="card-title fw-bold fs-5 col-12 col-md-auto">
+                                {{ post.title }}
                             </div>
-                            <div class="card-text post-body">
-                                {{ post.body }}
-                            </div>
-                            <div class="card-text d-flex justify-content-end">
-                                <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.id %}">Click Here To Read</a></span>
-                            </div>
+                            {% localtime on %}
+                            <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">
+                                {{ post.published_on|date:"d M, Y" }}</small>
+                            {% endlocaltime %}
+                        </div>
+                        <div class="card-text post-body">{{ post.body }}</div>
+                        <div class="card-text d-flex justify-content-end">
+                            <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.id %}">Click Here To
+                                    Read</a></span>
                         </div>
                     </div>
-                    {% endfor %}
-                    
-                        <div class="pagination-container">
-                            <ul class="pagination justify-content-center">
-                                {% if page_obj.has_previous %}
-                                <li class="page-item">
-                                  <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" aria-disabled="true">Previous</a>
-                                  </li>
-                                  {% endif %}
-                                  <div class="m-2">
-                                    <span class="current">
-                                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                                    </span>
-                                  </div>
-                                {% if page_obj.has_next %}
-                                <li class="page-item">
-                                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                                </li>
-                                <li><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
-                                {% endif %}
-                              </ul>
-                        </div>
-                        
                 </div>
-                {% else %}
-                <div class="text-center">
-                    No post found in the database
-                </div>
-                {% endif %}
+                {% endfor %}
 
+                <div class="pagination-container">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                                aria-disabled="true">Previous</a>
+                        </li>
+                        {% endif %}
+                        <div class="m-2">
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                            </span>
+                        </div>
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        <li>
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
+            {% else %}
+            <div class="text-center">No post found in the database</div>
+            {% endif %}
         </div>
     </div>
-    <script src="{% static '/js/dashboard-script.js' %}"></script>
-    {% endblock %}
+</div>
+<script src="{% static '/js/dashboard-script.js' %}"></script>
+{% endblock %}

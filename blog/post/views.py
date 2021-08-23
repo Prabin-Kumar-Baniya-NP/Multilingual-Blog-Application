@@ -1,7 +1,10 @@
+from django.core.paginator import Paginator
+from django.http.response import HttpResponseRedirect
+from django.urls.base import reverse
 from comment.models import Comment
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView 
+from django.views.generic import ListView, DetailView, View 
 from post.models import Post
 from category.models import Category
 from post.forms import PostCreationForm, PostUpdationForm
@@ -120,3 +123,15 @@ class PostDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
 
     def test_func(self):
         return self.get_object().author == self.request.user
+
+class SearchPost(View):
+    def get(self, request):
+        try:
+            posts = Post.objects.filter(title__icontains = request.GET["post-title"])
+        except:
+            return HttpResponseRedirect(reverse("post:dashboard"))
+        finally:
+            paginator = Paginator(posts, 25)
+            page_number = request.GET.get('page')
+            page_obj = paginator.get_page(page_number)
+            return render(request, "post/search-post.html", {'page_obj': page_obj})
