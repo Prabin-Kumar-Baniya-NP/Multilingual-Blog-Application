@@ -1,7 +1,7 @@
 from django.db import models
 from category.models import Category
 from django.contrib.auth.models import User
-
+from django.urls import reverse
 
 class Post(models.Model):
     POST_STATUS_CHOICES = [
@@ -24,6 +24,7 @@ class Post(models.Model):
     body = models.TextField("Post Description",
                             max_length=1000,
                             default="None")
+    slug = models.SlugField("Slug Field", max_length=250, unique=True, null=True, blank=True)
     published_on = models.DateTimeField("Publication Date", auto_now_add=True)
     last_updated = models.DateTimeField("Last Updated", auto_now=True)
     category = models.ManyToManyField(Category,
@@ -44,3 +45,6 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('post:view-post', kwargs={'pk': self.slug})

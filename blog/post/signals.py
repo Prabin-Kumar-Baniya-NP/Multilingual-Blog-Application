@@ -2,10 +2,25 @@ from django.dispatch.dispatcher import receiver
 from post.models import Post
 from django.db.models.signals import pre_save, post_delete
 import os
+import datetime
 
 
 @receiver(pre_save, sender=Post)
-def auto_delete_file_on_change(sender, instance,**kwargs):
+def populate_slug_field(sender, instance, **kwargs):
+    """
+    This method will populate slug field for new post
+    """
+    def unique_code():
+        return str(int(datetime.datetime.now().timestamp() * pow(10, 6)))
+
+    if instance.slug is None:
+        title = instance.title
+        instance.slug = str(instance.title).replace(" ", "-") + "-" + unique_code()
+        print(instance.slug)
+
+
+@receiver(pre_save, sender=Post)
+def auto_delete_file_on_change(sender, instance, **kwargs):
     """
     Deletes the old image of Post whenever user update the post object image.
     """
@@ -13,7 +28,7 @@ def auto_delete_file_on_change(sender, instance,**kwargs):
         pass
     else:
         new_instance = instance
-        old_instance = Post.objects.get(pk = instance.id)
+        old_instance = Post.objects.get(pk=instance.id)
         if old_instance.image:
             if old_instance.image != new_instance.image:
                 if os.path.isfile(old_instance.image.path):

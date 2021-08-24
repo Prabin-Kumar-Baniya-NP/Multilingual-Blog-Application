@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.http.response import HttpResponseRedirect
 from django.urls.base import reverse
 from comment.models import Comment
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic.edit import CreateView, FormView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView, View 
 from post.models import Post
@@ -11,10 +11,8 @@ from post.forms import PostCreationForm, PostUpdationForm
 from django.urls import reverse_lazy
 from comment.forms import AddCommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-
 class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """
     This view will handle creation of new post
@@ -64,16 +62,19 @@ class PostDetailView(DetailView):
     context_object_name = "post"
     template_name = "post/post.html"
 
+    def get_object(self, **kwargs):
+        return get_object_or_404(Post, slug = self.kwargs["slug"])
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["form"] = AddCommentForm(
             initial={
-                'post': self.kwargs['pk'],
+                'post': self.get_object().id,
                 'commented_by': self.request.user.username
                 }
             )
         if self.request.user.is_authenticated:
-            context["user_comments"] = Comment.objects.filter(post = self.kwargs["pk"], commented_by = self.request.user)
+            context["user_comments"] = Comment.objects.filter(post = self.get_object().id, commented_by = self.request.user)
         return context
     
 
@@ -84,14 +85,11 @@ class ManagePostListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
-    paginate_by = 5
+    paginate_by = 25
     ordering = ["-published_on"]
 
-
     def get_queryset(self):
-        queryset = super(ManagePostListView, self).get_queryset()
-        queryset = queryset.filter(author = self.request.user.id)
-        return queryset
+        return super().get_queryset().filter(author = self.request.user.id)
 
 class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     """

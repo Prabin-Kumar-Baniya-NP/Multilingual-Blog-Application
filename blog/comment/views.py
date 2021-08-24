@@ -67,6 +67,6 @@ def delete_comment(request, comment_id, post_id):
         if requested_comment.commented_by == request.user.username:
             requested_comment.delete()
             return HttpResponseRedirect(
-                reverse("post:view-post", kwargs={'pk': post_id}))
+                reverse("post:view-post", kwargs={'slug': requested_comment.post.slug}))
         else:
             raise Http404("You can only delete your comments")

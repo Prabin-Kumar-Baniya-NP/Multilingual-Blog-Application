@@ -20,7 +20,7 @@
                       {{ post.body }}
                   </div>
                   <div class="card-text d-flex justify-content-end">
-                      <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.id %}">Click Here To Read</a></span>
+                      <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.slug %}">Click Here To Read</a></span>
                   </div>
               </div>
           </div>
