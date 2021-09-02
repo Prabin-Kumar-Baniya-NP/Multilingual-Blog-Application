@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Pacifico&family=Roboto&display=swap');
 *,
 *::after,
 *::before {
@@ -32,7 +33,12 @@ body{
     position: relative;
     min-height: 100vh;
     font-size: 100%;
+    font-family: 'Roboto', sans-serif;
   }
+/* Navbar */
+.navbar-brand{
+  font-family: 'Berkshire Swash', cursive;
+}
 /* Dashboard Category - Section */
 .section-title{
     font-size: 1.2rem;
