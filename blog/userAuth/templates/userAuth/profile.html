@@ -8,17 +8,17 @@
         <div class="col-md-8">
             <div class="card-body">
                 <h1 class="card-title text-center">{{ request.user.first_name }} {{ request.user.last_name }}</h1>
-                <p class="card-text fs-5 lh-lg">
+                <p class="card-text lh-lg">
                     <b>Username</b> : {{ request.user.username }} <br>
                     <b>First Name</b> : {{ request.user.first_name }} <br>
                     <b>Last Name</b> : {{ request.user.last_name }} <br>
                     <b>Email Address</b> : {{ request.user.email }} <br>
                     <b>Date Joined</b> : {{ request.user.date_joined }} <br>
                     <b>Last Login</b> : {{ request.user.last_login }} <br>
-                    <button type="button" class="btn btn-outline-secondary">
+                    <button type="button" class="btn btn-outline-secondary m-3">
                         <a href="{% url 'userAuth:update-profile' %}">Update Profile</a>
                     </button>
-                   <button type="button" class="btn btn-danger">
+                   <button type="button" class="btn btn-danger m-3">
                     <a href="{% url 'userAuth:change-password' %}">Change Password</a>
                    </button>
                     
