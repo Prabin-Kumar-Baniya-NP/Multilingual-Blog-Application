@@ -15,8 +15,13 @@
                     <b>Email Address</b> : {{ request.user.email }} <br>
                     <b>Date Joined</b> : {{ request.user.date_joined }} <br>
                     <b>Last Login</b> : {{ request.user.last_login }} <br>
-                    <a href="{% url 'userAuth:update-profile' %}" class="btn btn-primary">Update Profile</a>
-                    <a href="{% url 'userAuth:change-password' %}" class="btn btn-danger">Change Password</a>
+                    <button type="button" class="btn btn-outline-secondary">
+                        <a href="{% url 'userAuth:update-profile' %}">Update Profile</a>
+                    </button>
+                   <button type="button" class="btn btn-danger">
+                    <a href="{% url 'userAuth:change-password' %}">Change Password</a>
+                   </button>
+                    
                 </p>
             </div>
         </div>

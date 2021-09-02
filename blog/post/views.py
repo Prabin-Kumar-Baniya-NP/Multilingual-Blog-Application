@@ -13,6 +13,8 @@ from comment.forms import AddCommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+
+
 class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """
     This view will handle creation of new post
@@ -42,9 +44,9 @@ class DashboardView(ListView):
     """
     model = Post
     context_object_name = "posts"
-    template_name = "post/blog.html"
+    template_name = "post/dashboard.html"
     ordering = ['-last_updated']
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -85,7 +87,7 @@ class ManagePostListView(LoginRequiredMixin, ListView):
     model = Post
     context_object_name = "posts"
     template_name = "post/manage-post-list.html"
-    paginate_by = 25
+    paginate_by = 10
     ordering = ["-published_on"]
 
     def get_queryset(self):

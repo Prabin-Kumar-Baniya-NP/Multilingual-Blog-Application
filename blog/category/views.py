@@ -43,7 +43,7 @@ def manage_category(request):
         messages.warning(request, "Something is not correct ! Please contact site administrator")
         return HttpResponseRedirect(reverse("category:manage-category"))
     finally:
-        paginator = Paginator(categories, 5)
+        paginator = Paginator(categories, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         return render(request, 'category/manage-category-list.html', {'page_obj': page_obj})

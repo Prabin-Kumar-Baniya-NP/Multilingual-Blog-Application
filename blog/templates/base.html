@@ -23,12 +23,28 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="#">Blogging Application</a>
+      <a class="navbar-brand" href="{% url 'post:dashboard' %}">Blogging Application</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {% if request.user.is_authenticated %}
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item m-1">
+            <a class="nav-link" href="{% url 'user:view-profile' %}">
+              <span class="nav-icons"><i class="bi bi-person-square"></i></span>
+              View profile
+            </a>
+          </li>
+          <li class="nav-item m-1">
+            <a class="nav-link" href="{% url 'user:logout' %}">
+              <span class="nav-icons"><i class="bi bi-box-arrow-in-left"></i></span>
+              Logout
+            </a>
+          </li>
+        </ul>
+        {% else %}
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item m-1">
             <a class="nav-link" href="{% url 'user:signup' %}">
@@ -43,6 +59,7 @@
             </a>
           </li>
         </ul>
+        {% endif %}
         <form action="{% url 'set_language' %}" method="post" class="d-flex justify-content-center align-items-center" >{% csrf_token %}
           <div class="me-3">
             <input name="next" type="hidden" value="{{ redirect_to }}">

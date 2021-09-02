@@ -17,7 +17,7 @@
           </small>
         </div>
         <div class="card-text post-body">
-          {{ post.body }}
+          {{ post.body|truncatechars:450 }}
         </div>
         <div class="card-text d-flex justify-content-end ">
           <div class="manage-post mt-1">
