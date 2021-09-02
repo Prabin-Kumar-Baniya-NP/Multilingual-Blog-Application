@@ -1,49 +1,51 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container mt-3 fs-5">
-    <div class="manage-blog-container mt-3 mb-3 p-3">
-        <div class="blog-collections">
-            {% for post in page_obj %}
-            <div class="card text-dark bg-light mb-3">
-                <div class="card-body">
-                    <div class="header row">
-                        <div class="card-title fw-bold fs-5 col-12 col-md-auto">{{ post.title }}</div>
-                        <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">
-                            Last updated on {{ post.last_updated }}
-                        </small>
+<div class="container mt-3">
+    <div class="post-collections">
+        <div class="section-title text-center">Here are the results</div>
+        {% for post in page_obj %}
+        <div class="card text-dark bg-light mb-3">
+            <div class="card-body">
+                <div class="header row">
+                    <div class="card-title fw-bold fs-5 col-12 col-md-auto">
+                        {{ post.title }}
                     </div>
-                    <div class="card-text post-body">
-                        {{ post.body }}
-                    </div>
+                    <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">
+                        {{ post.published_on|date:"d M, Y" }}</small>
+                </div>
+                <div class="card-text post-body">{{ post.body }}</div>
+                <div class="card-text d-flex justify-content-end">
+                    <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.slug %}">Click Here To
+                            Read</a></span>
                 </div>
             </div>
-            {% endfor %}
         </div>
-        <div class="pagination-container mt-3">
-            <ul class="pagination justify-content-center">
-                {% if page_obj.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
-                        aria-disabled="true">Previous</a>
-                </li>
-                {% endif %}
-                <div class="m-2">
-                    <span class="current">
-                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-                    </span>
-                </div>
-                {% if page_obj.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                </li>
-                <li><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
-                {% endif %}
-            </ul>
-        </div>
+        {% endfor %}
+    </div>
+    <div class="pagination-container mt-3">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                    aria-disabled="true">Previous</a>
+            </li>
+            {% endif %}
+            <div class="m-2">
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+            </div>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+            </li>
+            <li><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+            {% endif %}
+        </ul>
     </div>
 </div>
 </div>

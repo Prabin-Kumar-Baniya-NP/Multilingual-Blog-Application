@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="container form-container mt-5 mb-5">
-  <div class="post-creation-form m-3 p-3">
-    <h3 class="mt-2 mb-4">Enter the following details to update the Category</h3>
-    <form class="fs-5 mt-3 mb-3" method="POST" action="">
+    <div class="section-title text-center">Enter the following details to update the Category</div>
+    <form class="mt-3 mb-3" method="POST" action="">
       {% csrf_token %}
       {% for field in form %}
       <div class="form-floating mb-3">
@@ -14,7 +13,6 @@
       {% endfor %}
       <button type="submit" class="btn btn-success">Update Category</button>
     </form>
-  </div>
 </div>
 
 {% endblock %}
