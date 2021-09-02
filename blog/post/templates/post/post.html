@@ -18,7 +18,7 @@
         </div>
         {% endif %}
         <div class="post-body mt-4 lh-lg">
-            {{ post.body }}
+            {{ post.body|safe }}
         </div>
         <div class="comments-container mt-5 p-2" id="post-comments-container">
             <h4>Comments</h4>

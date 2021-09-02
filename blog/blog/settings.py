@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'comment.apps.CommentConfig',
     'userAuth.apps.UserauthConfig',
     'whitenoise.runserver_nostatic',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

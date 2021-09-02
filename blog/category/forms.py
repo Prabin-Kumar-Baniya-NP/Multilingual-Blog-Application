@@ -2,6 +2,7 @@ from django import forms
 from django.forms import fields, widgets
 from category.models import Category
 from django.contrib.auth.models import User
+from ckeditor.widgets import CKEditorWidget
 
 class CategoryCreationForm(forms.Form):
     def __init__(self, requested_user_id, *args, **kwargs):
@@ -23,12 +24,8 @@ class CategoryCreationForm(forms.Form):
     description = forms.CharField(
         label= "Category Description",
         max_length=126,
-        widget=forms.Textarea(attrs={
-            'class': 'form-control',
-            'id': "category-description",
-            'placeholder' : "Enter the Category Description",
-        })
-        )
+        widget=CKEditorWidget()
+    )
     created_by = forms.ModelChoiceField(queryset=None)
 
 class CategoryUpdationForm(forms.ModelForm):
@@ -41,9 +38,5 @@ class CategoryUpdationForm(forms.ModelForm):
                     'id' : "category-name",
                     'placeholder': "Enter the Category Name",
                     }),
-            'description': forms.Textarea(attrs={
-                    'class': 'form-control',
-                    'id': "category-description",
-                    'placeholder' : "Enter the Category Description",
-                    })
+            'description': CKEditorWidget()
         }

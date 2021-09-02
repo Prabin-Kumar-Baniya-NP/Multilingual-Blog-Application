@@ -2,6 +2,8 @@ from django.db import models
 from category.models import Category
 from django.contrib.auth.models import User
 from django.urls import reverse
+from ckeditor.fields import RichTextField
+
 
 class Post(models.Model):
     POST_STATUS_CHOICES = [
@@ -21,7 +23,7 @@ class Post(models.Model):
                               blank=True,
                               default=None,
                               verbose_name="Post Image")
-    body = models.TextField("Post Description",
+    body = RichTextField("Post Description",
                             max_length=1000,
                             default="None")
     slug = models.SlugField("Slug Field", max_length=250, unique=True, null=True, blank=True)

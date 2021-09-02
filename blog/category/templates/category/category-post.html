@@ -12,7 +12,7 @@
                     <small class="text-muted col-12 col-md-auto mt-0 mt-md-1"> {{ post.published_on|date:"d M, Y"}}</small>
                 </div>
                 <div class="card-text post-body">
-                    {{ post.body }}
+                    {{ post.body|safe }}
                 </div>
                 <div class="card-text d-flex justify-content-end">
                     <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.slug %}">Click Here To

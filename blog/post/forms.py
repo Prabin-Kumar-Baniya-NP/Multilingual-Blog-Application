@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.models import User
 from post.models import Post
 from category.models import Category
+from ckeditor.widgets import CKEditorWidget
+
 
 class PostCreationForm(forms.ModelForm):
     def __init__(self, requested_user_id, *args, **kwargs):
@@ -28,11 +30,7 @@ class PostCreationForm(forms.ModelForm):
                 'id': "post-title",
                 'placeholder': "Enter the Post Title",
             }),
-            'body': forms.Textarea(attrs={
-                'class': 'form-control',
-                'id': "post-body",
-                'placeholder': "Enter the Post Body",
-            }),
+            'body': CKEditorWidget(),
             'category': forms.CheckboxSelectMultiple(attrs={
                 'class': "form-check-input",
             }),
@@ -68,11 +66,7 @@ class PostUpdationForm(forms.ModelForm):
                 'id': "post-title",
                 'placeholder': "Enter the Post Title",
             }),
-            'body': forms.Textarea(attrs={
-                'class': 'form-control',
-                'id': "post-body",
-                'placeholder': "Enter the Post Body",
-            }),
+            'body': CKEditorWidget(),
             'category': forms.CheckboxSelectMultiple(attrs={
                 'class': "form-check-input",
             }),
