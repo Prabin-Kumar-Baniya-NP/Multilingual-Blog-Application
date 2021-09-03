@@ -38,7 +38,7 @@ def manage_category(request):
     This view will show all the categories which is created by the user
     """
     try:
-        categories = Category.objects.filter(created_by = request.user.id)
+        categories = Category.objects.filter(created_by = request.user.id).order_by("id")
     except:
         messages.warning(request, "Something is not correct ! Please contact site administrator")
         return HttpResponseRedirect(reverse("category:manage-category"))

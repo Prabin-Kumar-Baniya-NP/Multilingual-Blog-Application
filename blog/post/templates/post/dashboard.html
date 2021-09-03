@@ -16,12 +16,14 @@
         <p class="text-center">
             <a href="#" class="btn btn-sm btn-dark m-1" id="load-more">Load More</a>
             <br />
+            {% if request.user.is_authenticated %}
             <button type="button" class="btn btn-sm btn-outline-success m-1">
                 <a href="{% url 'category:create-category' %}">Create Category</a>
             </button>
             <button type="button" class="btn btn-sm btn-outline-primary m-1">
                 <a href="{% url 'category:manage-category' %}">Manage Category</a>
             </button>
+            {% endif %}
         </p>
     </section>
     <section class="posts col-sm-12 col-md-9 col-lg-10 mt-3">
@@ -34,6 +36,7 @@
                     <input type="submit" value="Search" class="btn btn-sm btn-dark ms-1" />
                 </form>
             </div>
+            {% if request.user.is_authenticated %}
             <div class="col-sm-12 col-md-5 col-lg-3">
                 <div class="d-flex align-items-center justify-content-center m-3">
                     <button type="button" class="btn btn-sm btn-outline-success ms-1">
@@ -44,6 +47,7 @@
                     </button>
                 </div>
             </div>
+            {% endif %}
         </div>
         <div class="blog-container col-12 m-1 pt-3 pb-3">
             {% if page_obj %}
