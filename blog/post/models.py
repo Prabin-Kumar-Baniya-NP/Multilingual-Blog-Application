@@ -49,4 +49,4 @@ class Post(models.Model):
         return self.title
     
     def get_absolute_url(self):
-        return reverse('post:view-post', kwargs={'pk': self.slug})
+        return reverse('post:view-post', kwargs={'slug': self.slug})

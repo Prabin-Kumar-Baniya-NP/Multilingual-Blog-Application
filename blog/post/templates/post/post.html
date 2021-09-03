@@ -20,6 +20,9 @@
         <div class="post-body mt-4 lh-lg">
             {{ post.body|safe }}
         </div>
+        <div class="post-link m-1">
+            <button type ="button" onclick="copyLinkHandler()" class="btn btn-sm btn-outline-dark">Copy Link</button>
+        </div>
         <div class="comments-container mt-5 p-2" id="post-comments-container">
             <h4>Comments</h4>
             {% for comment in user_comments %}
@@ -92,6 +95,12 @@
             var postID = {{ post.id }}
         </script>
         <script src="{% static 'js/comment-script.js' %}"></script>
+        <script>
+            function copyLinkHandler() {
+                var link = "{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ post.get_absolute_url }}"
+                navigator.clipboard.writeText(link);
+            }
+        </script>
     </div>
 </div>
 {% endblock %}
