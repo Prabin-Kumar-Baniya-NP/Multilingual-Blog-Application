@@ -13,7 +13,7 @@ class Post(models.Model):
         ('B', "Blocked"),
     ]
     title = models.CharField("Post Title",
-                             max_length=126,
+                             max_length=250,
                              error_messages={
                                  'max_length':
                                  "Title cann't be more than 126 characters",
@@ -24,7 +24,7 @@ class Post(models.Model):
                               default=None,
                               verbose_name="Post Image")
     body = RichTextField("Post Description",
-                            max_length=1000,
+                            max_length=5000,
                             default="None")
     slug = models.SlugField("Slug Field", max_length=250, unique=True, null=True, blank=True)
     published_on = models.DateTimeField("Publication Date", auto_now_add=True)
