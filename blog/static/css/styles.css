@@ -7,7 +7,24 @@
   margin: 0;
   padding: 0;
 }
+/* Color Theme */
+:root {
+  --primary: #15616D;
+  --secondary: #001524;
+  --link-fg: #231651;
+  --link-selected-fg: #2374AB;
+}
+.navbar{
+  background-color: var(--primary) !important;
+}
+.navbar-brand,
+.nav-link{
+  color: #eeebeb !important;
+}
 /* For every achor tag */
+a{
+  color: var(--link-fg);
+}
 a,
 a:hover {
   text-decoration: none;
@@ -48,6 +65,7 @@ body{
     font-size: 1.2rem;
     font-weight: bold;
     margin: 10px 10px;
+    color: var(--secondary);
 }
 
 /* Manage Category Page - Category title */
