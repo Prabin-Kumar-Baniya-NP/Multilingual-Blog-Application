@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 
 <div class="container mt-3">
   <div class="section-title text-center">
-    Choose Any Post To Update or Delete
+    {% translate "Choose Any Post To Update or Delete" %}
   </div>
   <div class="post-collections">
     {% if posts %}
@@ -22,26 +23,26 @@
         <div class="card-text d-flex justify-content-end ">
           <div class="manage-post mt-1">
             <button type="button" class="btn btn-outline-secondary">
-              <a href="{% url 'post:update-post' post.id %}">Update</a>
+              <a href="{% url 'post:update-post' post.id %}">{% translate "Update" %}</a>
             </button>
             <button type="button" class="btn btn-danger">
-              <a href="#" data-bs-toggle="modal" data-bs-target="#delete">Delete</a>
+              <a href="#" data-bs-toggle="modal" data-bs-target="#delete">{% translate "Delete" %}</a>
             </button>
           </div>
           <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="delete" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Confirmation For Deletion</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">{% translate "Confirmation For Deletion" %}</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <form method="post" action="{% url 'post:delete-post' post.id %}">
                     {% csrf_token %}
-                    <p>Are you sure you want to delete this post ?<br> <b>{{ post.title }}</b></p>
+                    <p>{% translate "Are you sure you want to delete this post ?" %}<br> <b>{{ post.title }}</b></p>
 
                     <div class="d-flex align-items-end justify-content-end">
-                      <a href="#" class="btn btn-dark m-1" data-bs-dismiss="modal">Cancel</a>
+                      <a href="#" class="btn btn-dark m-1" data-bs-dismiss="modal">{% translate "Cancel" %}</a>
                       <input type="submit" value="Confirm" class="btn btn-danger m-1">
                     </div>
                   </form>
@@ -55,7 +56,7 @@
     {% endfor %}
     {% else %}
     <div class="section-title">
-      There is no any posts to show right now.
+      {% translate "There is no any posts to show right now." %}
     </div>
     {% endif %}
 
@@ -64,11 +65,11 @@
     <ul class="pagination justify-content-center">
       {% if page_obj.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+        <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">{% translate "First" %}</a>
       </li>
       <li class="page-item">
         <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
-          aria-disabled="true">Previous</a>
+          aria-disabled="true">{% translate "Previous" %}</a>
       </li>
       {% endif %}
       <div class="m-2">
@@ -78,9 +79,9 @@
       </div>
       {% if page_obj.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">{% translate "Next" %}</a>
       </li>
-      <li><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a></li>
+      <li><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{% translate "Last" %}</a></li>
       {% endif %}
     </ul>
   </div>

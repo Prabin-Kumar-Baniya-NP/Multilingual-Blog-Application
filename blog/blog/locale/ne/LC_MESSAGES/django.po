@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-26 19:18+0545\n"
+"POT-Creation-Date: 2021-09-03 21:55+0545\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,98 +18,309 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: blog/settings.py:115
+#: blog/settings.py:117
 msgid "English"
 msgstr "अंग्रेजी"
 
-#: blog/settings.py:116
+#: blog/settings.py:118
 msgid "Nepali"
 msgstr "नेपाली"
 
-#: category/models.py:12
+#: category/models.py:14
 msgid "Category Name"
 msgstr "श्रेणी नाम"
 
-#: category/models.py:13
+#: category/models.py:15
 msgid "Category Description"
 msgstr "श्रेणी वर्णन"
 
-#: category/models.py:14
+#: category/models.py:16
 msgid "Created On"
 msgstr "सिर्जना गरिएको"
 
-#: category/models.py:15
+#: category/models.py:17
 msgid "Last Updated On"
 msgstr "अन्तिम अपडेट गरिएको"
 
-#: category/models.py:16
+#: category/models.py:18
 msgid "Created By"
 msgstr "द्वारा बनाईएको"
 
-#: category/models.py:17
+#: category/models.py:19
 msgid "Category Status"
 msgstr "श्रेणी स्थिति"
 
-#: category/models.py:21
+#: category/models.py:23
 msgid "Category"
 msgstr "श्रेणी"
 
-#: category/models.py:22
+#: category/models.py:24
 msgid "Categories"
 msgstr "श्रेणीहरू"
 
-#: templates/admin/base.html:42
-msgid "Welcome,"
-msgstr "स्वागतम्"
+#: category/templates/category/category-post.html:6
+msgid "Here are your posts"
+msgstr "यहाँ तपाइँको पोष्टहरु छन्"
 
-#: templates/admin/base.html:47
-msgid "View site"
+#: category/templates/category/category-post.html:18
+#: post/templates/post/dashboard.html:70
+#: post/templates/post/search-post.html:19
+msgid "Click Here To Read"
+msgstr "पढ्न यहाँ क्लिक गर्नुहोस्"
+
+#: category/templates/category/category-post.html:28
+#: category/templates/category/manage-category-list.html:46
+#: post/templates/post/dashboard.html:80
+#: post/templates/post/manage-post-list.html:67
+#: post/templates/post/search-post.html:29
+msgid "First"
+msgstr "पहिलो"
+
+#: category/templates/category/category-post.html:32
+#: category/templates/category/manage-category-list.html:50
+#: post/templates/post/dashboard.html:84
+#: post/templates/post/manage-post-list.html:71
+#: post/templates/post/search-post.html:33
+msgid "Previous"
+msgstr "अघिल्लो"
+
+#: category/templates/category/category-post.html:42
+#: category/templates/category/manage-category-list.html:60
+#: post/templates/post/dashboard.html:94
+#: post/templates/post/manage-post-list.html:81
+#: post/templates/post/search-post.html:43
+msgid "Next"
+msgstr "अर्को"
+
+#: category/templates/category/category-post.html:44
+#: category/templates/category/manage-category-list.html:62
+#: post/templates/post/dashboard.html:97
+#: post/templates/post/manage-post-list.html:83
+#: post/templates/post/search-post.html:45
+msgid "Last"
+msgstr "अन्तिम"
+
+#: category/templates/category/category-post.html:52
+#: post/templates/post/dashboard.html:104
+msgid "No post found in the database"
+msgstr "डाटाबेस मा कुनै पोस्ट भेटिएन"
+
+#: category/templates/category/create-category.html:6
+msgid "Enter the following details to create a new Category"
+msgstr "नयाँ श्रेणी बनाउन को लागी निम्न विवरण प्रविष्ट गर्नुहोस्"
+
+#: category/templates/category/create-category.html:25
+#: category/templates/category/update-category.html:18
+#: post/templates/post/dashboard.html:21
+msgid "Create Category"
+msgstr "श्रेणी सिर्जना गर्नुहोस्"
+
+#: category/templates/category/manage-category-list.html:6
+msgid "Choose Any Category To Update or Delete"
+msgstr "अपडेट वा मेट्न को लागी कुनै पनि श्रेणी छान्नुहोस्"
+
+#: category/templates/category/manage-category-list.html:16
+#: post/templates/post/manage-post-list.html:25
+msgid "Update"
+msgstr "अपडेट गर्नुहोस्"
+
+#: category/templates/category/manage-category-list.html:18
+#: category/templates/category/manage-category-list.html:34
+#: post/templates/post/manage-post-list.html:28
+#: post/templates/post/post.html:58
+msgid "Delete"
+msgstr "मेटाउन"
+
+#: category/templates/category/manage-category-list.html:24
+#: post/templates/post/manage-post-list.html:35
+msgid "Confirmation For Deletion"
+msgstr "मेटाउन को लागी पुष्टि"
+
+#: category/templates/category/manage-category-list.html:28
+msgid "Are you sure you want to delete this Category"
+msgstr "के तपाइँ पक्का हुनुहुन्छ कि तपाइँ यो श्रेणी मेटाउन चाहानुहुन्छ?"
+
+#: category/templates/category/manage-category-list.html:32
+#: post/templates/post/manage-post-list.html:44
+#: post/templates/post/post.html:56
+msgid "Cancel"
+msgstr "रद्द गर्नुहोस्"
+
+#: category/templates/category/update-category.html:4
+msgid "Enter the following details to update the Category"
+msgstr "श्रेणी अपडेट गर्न निम्न विवरण प्रविष्ट गर्नुहोस्"
+
+#: post/templates/post/create-post.html:4
+msgid "Enter the following details to create a new post"
+msgstr "नयाँ पोस्ट सिर्जना गर्न निम्न विवरण प्रविष्ट गर्नुहोस्"
+
+#: post/templates/post/create-post.html:19
+#: post/templates/post/update-post.html:20
+msgid "Choose Category"
+msgstr "श्रेणी"
+
+#: post/templates/post/create-post.html:37
+#: post/templates/post/dashboard.html:43
+msgid "Create Post"
+msgstr "सिर्जना गरिएको"
+
+#: post/templates/post/dashboard.html:6
+msgid "Browse By Category"
+msgstr "श्रेणी"
+
+#: post/templates/post/dashboard.html:17 post/templates/post/post.html:67
+msgid "Load More"
+msgstr "अझ धेरै लोड गर्नुहोस्"
+
+#: post/templates/post/dashboard.html:24
+msgid "Manage Category"
+msgstr "श्रेणी व्यवस्थापन गर्नुहोस्"
+
+#: post/templates/post/dashboard.html:46
+msgid "Manage Post"
+msgstr "पोस्ट व्यवस्थापन गर्नुहोस्"
+
+#: post/templates/post/dashboard.html:55
+msgid "Here is the Latest Blogs"
+msgstr "यहाँ नवीनतम ब्लग छ"
+
+#: post/templates/post/manage-post-list.html:6
+msgid "Choose Any Post To Update or Delete"
+msgstr "कुनै पनी पोस्ट अपडेट वा मेटाउन को लागी छनौट गर्नुहोस्"
+
+#: post/templates/post/manage-post-list.html:41
+msgid "Are you sure you want to delete this post ?"
+msgstr "के तपाइँ पक्का यो पोस्ट मेटाउन चाहानुहुन्छ?"
+
+#: post/templates/post/manage-post-list.html:58
+msgid "There is no any posts to show right now."
+msgstr "अहिले देखाउन को लागी कुनै पोस्ट छैन।"
+
+#: post/templates/post/post.html:10
+msgid "Published on"
+msgstr "प्रकाशित मिति"
+
+#: post/templates/post/post.html:13
+msgid "Last updated on"
+msgstr "अन्तिम अपडेट गरिएको"
+
+#: post/templates/post/post.html:24
+msgid "Copy Link"
+msgstr "लिंक प्रतिलिपि"
+
+#: post/templates/post/post.html:27
+msgid "Comments"
+msgstr "टिप्पणीहरु"
+
+#: post/templates/post/post.html:52
+msgid "Are you sure you want to delete this Comment"
+msgstr "के तपाइँ पक्का हुनुहुन्छ कि तपाइँ यो टिप्पणी मेटाउन चाहानुहुन्छ?"
+
+#: post/templates/post/post.html:87
+msgid "Add Comment"
+msgstr "टिप्पणी जोड्नुहोस्"
+
+#: post/templates/post/search-post.html:6
+msgid "Here are the results"
+msgstr "यहाँ परिणामहरु छन्"
+
+#: post/templates/post/update-post.html:5
+msgid "Update the following details for this post."
+msgstr "यस पोस्ट को लागी निम्न विवरण अपडेट गर्नुहोस्।"
+
+#: post/templates/post/update-post.html:38
+msgid "Update Post"
+msgstr "पोस्ट अपडेट गर्नुहोस्"
+
+#: templates/base.html:26
+msgid "Blogging Application"
+msgstr "ब्लग एप"
+
+#: templates/base.html:37
+msgid "View profile"
 msgstr "साइट हेर्नुहोस्"
 
-#: templates/admin/base.html:52
-msgid "Documentation"
-msgstr "कागजात"
+#: templates/base.html:43
+msgid "Logout"
+msgstr "बाहिर निस्कनु"
 
-#: templates/admin/base.html:56
-msgid "Change password"
+#: templates/base.html:52
+msgid "Sign Up"
+msgstr "साइन अप"
+
+#: templates/base.html:58
+msgid "Login"
+msgstr "लगइन"
+
+#: userAuth/templates/userAuth/change-password.html:4
+msgid "Enter your new Password Here"
+msgstr "तपाइँको नयाँ पासवर्ड यहाँ प्रविष्ट गर्नुहोस्"
+
+#: userAuth/templates/userAuth/change-password.html:14
+#: userAuth/templates/userAuth/profile.html:22
+msgid "Change Password"
 msgstr "पासवर्ड परिवर्तन"
 
-#: templates/admin/base.html:58
-msgid "Log out"
-msgstr "लगआउट"
+#: userAuth/templates/userAuth/login.html:5
+msgid "Enter the username and password to login"
+msgstr "लगइन गर्न को लागी प्रयोगकर्ता नाम र पासवर्ड प्रविष्ट गर्नुहोस्"
 
-#: templates/admin/base.html:68
-msgid "Home"
-msgstr ""
+#: userAuth/templates/userAuth/login.html:17
+msgid "Don't have an account. Don't worry! To Create a New Account"
+msgstr "खाता छैन। चिन्ता नगर्नुहोस्! नयाँ खाता बनाउन को लागी"
 
-#: templates/base.html:25
-msgid "Prabin Kumar Baniya"
-msgstr "प्रवीण कुमार बनिया"
+#: userAuth/templates/userAuth/login.html:17
+#: userAuth/templates/userAuth/signup.html:18
+msgid "Click here"
+msgstr "यहाँ क्लिक गर्नुहोस्"
 
-#: templates/base.html:34 templates/base.html:119
-msgid "Portfolio"
-msgstr "पोर्टफोलियो"
-
-#: templates/base.html:38 templates/base.html:123
-msgid "Blogs"
-msgstr "ब्लगहरू"
-
-#: templates/base.html:42 templates/base.html:127
-msgid "Contact Me"
-msgstr "सम्पर्क गर्नुस्"
-
-#: templates/base.html:47
-msgid "My Profile"
+#: userAuth/templates/userAuth/profile.html:19
+#: userAuth/templates/userAuth/update-profile.html:27
+msgid "Update Profile"
 msgstr "मेरो प्रोफाइल"
 
-#: templates/base.html:101
-msgid "Facebook"
-msgstr "फेसबुक"
+#: userAuth/templates/userAuth/signup.html:5
+msgid "Enter the following details to create a free account"
+msgstr "एक मुक्त खाता बनाउन को लागी निम्न विवरण प्रविष्ट गर्नुहोस्"
 
-#: templates/base.html:105
-msgid "Instagram"
-msgstr "इन्स्टाग्राम"
+#: userAuth/templates/userAuth/signup.html:15
+msgid "Create Account"
+msgstr "सिर्जना गरिएको"
 
-#: templates/base.html:109
-msgid "Linkedin"
-msgstr "लिंक्डिन"
+#: userAuth/templates/userAuth/signup.html:18
+msgid "Already have an account! To login in this site"
+msgstr "पहिले नै एउटा खाता छ! यो साइट मा लगइन गर्न"
+
+#: userAuth/templates/userAuth/update-profile.html:4
+msgid "Fill the following details to update your profile"
+msgstr "तपाइँको प्रोफाइल अपडेट गर्न निम्न विवरण भर्नुहोस्"
+
+#~ msgid "Welcome,"
+#~ msgstr "स्वागतम्"
+
+#~ msgid "Documentation"
+#~ msgstr "कागजात"
+
+#~ msgid "Log out"
+#~ msgstr "लगआउट"
+
+#~ msgid "Prabin Kumar Baniya"
+#~ msgstr "प्रवीण कुमार बनिया"
+
+#~ msgid "Portfolio"
+#~ msgstr "पोर्टफोलियो"
+
+#~ msgid "Blogs"
+#~ msgstr "ब्लगहरू"
+
+#~ msgid "Contact Me"
+#~ msgstr "सम्पर्क गर्नुस्"
+
+#~ msgid "Facebook"
+#~ msgstr "फेसबुक"
+
+#~ msgid "Instagram"
+#~ msgstr "इन्स्टाग्राम"
+
+#~ msgid "Linkedin"
+#~ msgstr "लिंक्डिन"

@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <div class="dashboard row m-0 p-0">
     <section class="category col-sm-12 col-md-3 col-lg-2 mt-3">
-        <div class="section-title text-center">Browse By Category</div>
+        <div class="section-title text-center">{% translate "Browse By Category" %}</div>
         <ul class="list-group m-2">
             {% for category in categories %}
             <li class="list-group-item d-flex align-items-center justify-content-center">
@@ -14,14 +15,14 @@
             {% endfor %}
         </ul>
         <p class="text-center">
-            <a href="#" class="btn btn-sm btn-dark m-1" id="load-more">Load More</a>
+            <a href="#" class="btn btn-sm btn-dark m-1" id="load-more">{% translate "Load More" %}</a>
             <br />
             {% if request.user.is_authenticated %}
             <button type="button" class="btn btn-sm btn-outline-success m-1">
-                <a href="{% url 'category:create-category' %}">Create Category</a>
+                <a href="{% url 'category:create-category' %}">{% translate "Create Category" %}</a>
             </button>
             <button type="button" class="btn btn-sm btn-outline-primary m-1">
-                <a href="{% url 'category:manage-category' %}">Manage Category</a>
+                <a href="{% url 'category:manage-category' %}">{% translate "Manage Category" %}</a>
             </button>
             {% endif %}
         </p>
@@ -40,10 +41,10 @@
             <div class="col-sm-12 col-md-5 col-lg-3">
                 <div class="d-flex align-items-center justify-content-center m-3">
                     <button type="button" class="btn btn-sm btn-outline-success ms-1">
-                        <a href="{% url 'post:create-post' %}">Create Post</a>
+                        <a href="{% url 'post:create-post' %}">{% translate "Create Post" %}</a>
                     </button>
                     <button type="button" class="btn btn-sm btn-outline-primary ms-1">
-                        <a href="{% url 'post:manage-post' %}">Manage Post</a>
+                        <a href="{% url 'post:manage-post' %}">{% translate "Manage Post" %}</a>
                     </button>
                 </div>
             </div>
@@ -52,7 +53,7 @@
         <div class="blog-container col-12 m-1 pt-3 pb-3">
             {% if page_obj %}
             <div class="blog-type-title fs-4 p-1 p-md-2">
-                <div class="section-title text-center">Here is the Latest Blogs</div>
+                <div class="section-title text-center">{% translate "Here is the Latest Blogs" %}</div>
             </div>
             <div class="blog-collections">
                 {% for post in page_obj %}
@@ -67,8 +68,7 @@
                         </div>
                         <div class="card-text post-body">{{ post.body|safe|truncatechars:450 }}</div>
                         <div class="card-text d-flex justify-content-end">
-                            <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.slug %}">Click Here To
-                                    Read</a></span>
+                            <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.slug %}">{% translate "Click Here To Read" %}</a></span>
                         </div>
                     </div>
                 </div>
@@ -78,11 +78,11 @@
                     <ul class="pagination justify-content-center">
                         {% if page_obj.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">First</a>
+                            <a class="page-link" href="?page=1" tabindex="-1" aria-disabled="true">{% translate "First" %}</a>
                         </li>
                         <li class="page-item">
                             <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
-                                aria-disabled="true">Previous</a>
+                                aria-disabled="true">{% translate "Previous" %}</a>
                         </li>
                         {% endif %}
                         <div class="m-2">
@@ -92,17 +92,17 @@
                         </div>
                         {% if page_obj.has_next %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">{% translate "Next" %}</a>
                         </li>
                         <li>
-                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{% translate "Last" %}</a>
                         </li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
             {% else %}
-            <div class="text-center">No post found in the database</div>
+            <div class="text-center">{% translate "No post found in the database" %}</div>
             {% endif %}
         </div>
     </section>
