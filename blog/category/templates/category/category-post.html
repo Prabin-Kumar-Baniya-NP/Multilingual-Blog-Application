@@ -9,12 +9,13 @@
         <div class="card text-dark bg-light mb-3">
             <div class="card-body">
                 <div class="header row">
-                    <div class="card-title fw-bold col-12 col-md-auto">{{ post.title }}</div>
-                    <small class="text-muted col-12 col-md-auto mt-0 mt-md-1"> {{ post.published_on|date:"d M, Y"}}</small>
+                    <div class="card-title fw-bold fs-5 col-12 col-md-auto">
+                        {{ post.title }}
+                    </div>
+                    <small class="text-muted col-12 col-md-auto mt-0 mt-md-1">
+                        {{ post.published_on|date:"d M, Y" }}</small>
                 </div>
-                <div class="card-text post-body">
-                    {{ post.body|safe }}
-                </div>
+                <div class="card-text post-body">{{ post.body|safe|truncatechars:450 }}</div>
                 <div class="card-text d-flex justify-content-end">
                     <span class="text-muted mt-1"><a href="{% url 'post:view-post' post.slug %}">{% translate "Click Here To Read" %}</a></span>
                 </div>
