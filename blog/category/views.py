@@ -8,6 +8,11 @@ from django.http import HttpResponseRedirect, JsonResponse, Http404
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from post.models import Post
+import logging
+
+
+logger = logging.getLogger('django')
+
 
 @login_required
 def create_category(request):
@@ -22,6 +27,7 @@ def create_category(request):
             created_by_user_model = User.objects.get(id = created_by_id)
             new_category = Category.objects.create(name = name, description = description, created_by = created_by_user_model)
             messages.success(request, f"{new_category} Category created successfully and Sent for Approval")
+            logger.info(f"New Category Created: {name}")
             return HttpResponseRedirect(reverse("category:manage-category"))
         except:
             messages.error(request, "Unable to Create Category ! Please Enter Valid Data")
@@ -40,6 +46,7 @@ def manage_category(request):
     try:
         categories = Category.objects.filter(created_by = request.user.id).order_by("id")
     except:
+        logger.debug("Something went wrong", exc_info=True)
         messages.warning(request, "Something is not correct ! Please contact site administrator")
         return HttpResponseRedirect(reverse("category:manage-category"))
     finally:
@@ -56,12 +63,14 @@ def delete_category(request, category_id):
     try:
         requested_category = Category.objects.get(id= category_id)
     except Category.DoesNotExist:
+        logger.error("Category Does Not Exists", exc_info=True)
         messages.warning(request, "Requested category doesn't exists in the database")
         return HttpResponseRedirect(reverse("post:dashboard"))
     finally:
         try:
             if requested_category.created_by == request.user:
                 requested_category.delete()
+                logger.info(f"Category Deleted Successfully: {requested_category}")
                 messages.success(request, f"{requested_category.name} Category Deleted Succesfully")
                 return HttpResponseRedirect(reverse("category:manage-category"))
             else:
@@ -80,6 +89,7 @@ def update_category(request, category_id):
     try:
         requested_category = Category.objects.get(id = category_id)
     except Category.DoesNotExist:
+        logger.error("Requested Category doesn't exits in the database", exc_info=True)
         messages.warning(request, "Requested Category doesn't exits in the database")
         return HttpResponseRedirect(reverse("post:manage-category"))
     finally:
@@ -101,6 +111,7 @@ def update_category(request, category_id):
                 messages.error(request, f"You dont have ownership over {requested_category.name} category")
                 return HttpResponseRedirect(reverse("category:manage-category"))
         except:
+            logger.info("Something went wrong !", exc_info=True)
             messages.error(request, "Something went wrong ! Please Contact Site administrator")
             return HttpResponseRedirect(reverse("category:manage-category"))
 
