@@ -37,7 +37,19 @@ jobs:
         pip install coverage
         coverage run manage.py test
         coverage report
+      env:
+        NAME: ${{ secrets.NAME }}
+        USER: ${{ secrets.USER }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        HOST: ${{ secrets.HOST }}
+        PORT: ${{ secrets.PORT }}
     - name: Django Test
       working-directory: ./blog
       run: |
         python3 manage.py test
+      env:
+        NAME: ${{ secrets.NAME }}
+        USER: ${{ secrets.USER }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        HOST: ${{ secrets.HOST }}
+        PORT: ${{ secrets.PORT }}
