@@ -13,6 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
 import logging
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,16 +83,8 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ["NAME"],
-        "USER": os.environ["USER"],
-        "PASSWORD": os.environ["PASSWORD"],
-        "HOST": os.environ["HOST"],
-        "PORT": os.environ["PORT"],
-    }
-}
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
