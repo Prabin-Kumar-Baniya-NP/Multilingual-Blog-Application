@@ -28,8 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 'localhost', 'testserver',
-    'prabin44baniya.pythonanywhere.com',
-    'portfolio-blog-application.herokuapp.com'
+    'django-blogging-application.herokuapp.com'
 ]
 
 # Application definition
