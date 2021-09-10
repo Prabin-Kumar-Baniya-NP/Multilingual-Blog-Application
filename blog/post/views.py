@@ -13,7 +13,10 @@ from comment.forms import AddCommentForm
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
+import logging
 
+
+logger = logging.getLogger('django')
 
 class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     """
@@ -32,6 +35,7 @@ class PostCreateView(SuccessMessageMixin, LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.save()
+        logger.info("New Post Created: "+str(form.cleaned_data["title"]))
         return super().form_valid(form)
     
     def form_invalid(self, form):
@@ -108,6 +112,7 @@ class PostUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     
     def form_valid(self, form):
         form.save()
+        logger.info("Post Updated Successfully: " + str(form.cleaned_data["title"]))
         return super().form_valid(form)
     
     def form_invalid(self, form):

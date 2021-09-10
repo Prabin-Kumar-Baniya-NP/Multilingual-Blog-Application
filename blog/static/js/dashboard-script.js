@@ -14,6 +14,7 @@ async function getCategories() {
     try {
         const response = await fetch(url, params);
         const data = await response.json();
+        console.log(data)
         let ul = document.querySelector("ul")
         for (let i = 0; i < data.length; i++) {
             let li = document.createElement("li");
