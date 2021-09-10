@@ -133,3 +133,5 @@ media/
 
 # VS Code 
 .vscode/
+
+staticfiles/
