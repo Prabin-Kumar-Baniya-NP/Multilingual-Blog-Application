@@ -14,13 +14,12 @@ async function getCategories() {
     try {
         const response = await fetch(url, params);
         const data = await response.json();
-        console.log(data)
-        let ul = document.querySelector("ul")
+        let ul = document.querySelector(".list-group")
         for (let i = 0; i < data.length; i++) {
             let li = document.createElement("li");
-            li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-start");
+            li.classList.add("list-group-item", "d-flex", "align-items-center", "justify-content-center");
             let div = document.createElement("div");
-            div.classList.add("ms-2", "me-auto");
+            div.classList.add("m-1");
             let anchorTag = document.createElement("a")
             anchorTag.href = "/category/category-posts/" + data[i].name;
             anchorTag.innerText = data[i].name;

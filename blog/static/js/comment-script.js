@@ -4,32 +4,31 @@ function displayComments(data) {
     commentsContainer = document.getElementById("post-comments-container");
     for (let i = 0; i < data.length; i++) {
         let divCommentItem = document.createElement("div");
-        divCommentItem.classList.add("comment-item", "row", "mt-3", "mb-3");
+        divCommentItem.classList.add("comment-item", "row", "mb-3");
 
         let divProfileImage = document.createElement("div");
-        divProfileImage.classList.add("user-profile-image", "col-2", "col-md-1", "d-flex", "align-items-center", "justify-content-center");
+        divProfileImage.classList.add("user-profile-image", "col-1", "d-flex", "align-items-center", "justify-content-center");
         let itag = document.createElement("i");
         itag.classList.add("bi", "bi-person");
         divProfileImage.appendChild(itag);
         divCommentItem.appendChild(divProfileImage);
 
+        let usernameCommentWrapper = document.createElement("div")
+        usernameCommentWrapper.classList.add("col-11", "row")
+
         let divUsername = document.createElement("div");
-        divUsername.classList.add("username", "col-10", "d-flex", "align-items-center", "justify-content-start")
+        divUsername.classList.add("username", "col-12")
         let btag = document.createElement("b");
         btag.innerText = data[i].commented_by;
         divUsername.appendChild(btag);
-        divCommentItem.appendChild(divUsername);
+        usernameCommentWrapper.appendChild(divUsername);
 
         let divComment = document.createElement("div");
-        divComment.classList.add("comment", "offset-2", "col-10", "offset-md-1", "col-md-11");
+        divComment.classList.add("comment-body", "col-12");
         divComment.innerText = data[i].body;
-        divCommentItem.appendChild(divComment);
+        usernameCommentWrapper.appendChild(divComment);
 
-        let divCommentVotes = document.createElement("div");
-        divCommentVotes.classList.add("user-comments-vote", "offset-2", "col-10", "offset-md-1", "col-md-11")
-
-        divCommentItem.appendChild(divCommentVotes);
-
+        divCommentItem.appendChild(usernameCommentWrapper);
         commentsContainer.appendChild(divCommentItem);
     }
 }
