@@ -3,6 +3,8 @@ from category.models import Category
 from django.contrib.auth.models import User
 from django.urls import reverse
 from ckeditor.fields import RichTextField
+import datetime
+from django.utils.text import slugify
 
 
 class Post(models.Model):
@@ -26,7 +28,7 @@ class Post(models.Model):
     body = RichTextField("Post Description",
                             max_length=5000,
                             default="None")
-    slug = models.SlugField("Slug Field", max_length=250, unique=True, null=True, blank=True)
+    slug = models.SlugField("Slug Field", max_length=300, unique=True, null=True, blank=True)
     published_on = models.DateTimeField("Publication Date", auto_now_add=True)
     last_updated = models.DateTimeField("Last Updated", auto_now=True)
     category = models.ManyToManyField(Category,
@@ -50,3 +52,11 @@ class Post(models.Model):
     
     def get_absolute_url(self):
         return reverse('post:view-post', kwargs={'slug': self.slug})
+    
+    def save(self, *args, **kwargs):
+        def unique_code():
+            return str(int(datetime.datetime.now().timestamp() * pow(10, 6)))
+        
+        if not self.slug:
+            self.slug = slugify(str(self.title) + unique_code())
+        return super().save(*args, **kwargs)

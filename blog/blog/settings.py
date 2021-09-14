@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cn_ndf_444^o#^s(y16#10izcg=rw(fsql5zc%fl#2htaavhhv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1', 'localhost', 'testserver',
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'category.apps.CategoryConfig',
     'comment.apps.CommentConfig',
     'userAuth.apps.UserauthConfig',
-    'whitenoise.runserver_nostatic',
     'ckeditor',
 ]
 
@@ -143,10 +142,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
