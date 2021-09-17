@@ -1,4 +1,4 @@
-function displayComments(data) {
+function displayCommentsForGetMethods(data) {
     commentsContainer = document.getElementById("post-comments-container");
     for (let i = 0; i < data.length; i++) {
         let divCommentItem = document.createElement("div");
@@ -30,6 +30,38 @@ function displayComments(data) {
         commentsContainer.appendChild(divCommentItem);
     }
 }
+
+function displayCommentsForPostMethod(data) {
+        commentsContainer = document.getElementById("post-comments-container");
+        let divCommentItem = document.createElement("div");
+        divCommentItem.classList.add("comment-item", "row", "mb-3");
+
+        let divProfileImage = document.createElement("div");
+        divProfileImage.classList.add("user-profile-image", "col-1", "d-flex", "align-items-center", "justify-content-center");
+        let itag = document.createElement("i");
+        itag.classList.add("bi", "bi-person");
+        divProfileImage.appendChild(itag);
+        divCommentItem.appendChild(divProfileImage);
+
+        let usernameCommentWrapper = document.createElement("div")
+        usernameCommentWrapper.classList.add("col-11", "row")
+
+        let divUsername = document.createElement("div");
+        divUsername.classList.add("username", "col-12")
+        let btag = document.createElement("b");
+        btag.innerText = data.commented_by;
+        divUsername.appendChild(btag);
+        usernameCommentWrapper.appendChild(divUsername);
+
+        let divComment = document.createElement("div");
+        divComment.classList.add("comment-body", "col-12");
+        divComment.innerText = data.body;
+        usernameCommentWrapper.appendChild(divComment);
+
+        divCommentItem.appendChild(usernameCommentWrapper);
+        commentsContainer.appendChild(divCommentItem);
+}
+
 var startIndex = 0;
 async function getComments() {
     const getCommentsURL ='/comments/get-comments/' + postID + '/' + startIndex;
@@ -45,7 +77,7 @@ async function getComments() {
     const response = await fetch(getCommentsURL, params);
     const data = await response.json();
     if (data.length != 0){
-        displayComments(data);
+        displayCommentsForGetMethods(data);
     }
     else{
         loadCommentsbtn.style.display = "None"
@@ -99,12 +131,11 @@ async function postComment() {
         if (response.status == "success"){
             let commentObject = JSON.parse(formDataJSONString);
             commentObject.commented_by = username;
-            const commentArray = [commentObject];
-            displayComments(commentArray);
+            displayCommentsForPostMethod(commentObject);
         }
     }
     catch(error){
-        console.log("Error");
+        console.log(error);
     }
 }
 formSubmitBtn.addEventListener("click", postComment);

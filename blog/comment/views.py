@@ -46,8 +46,7 @@ def post_comment_ajax(request):
             else:
                 raise Http404("Invalid Data!")
         except Exception as e:
-            print(e)
-            raise Http404(e)
+            raise Http404("Something went wrong!")
     else:
         raise Http404("This type of method is not allowed")
 
