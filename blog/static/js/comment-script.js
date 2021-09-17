@@ -1,5 +1,3 @@
-let pnum = 0;
-
 function displayComments(data) {
     commentsContainer = document.getElementById("post-comments-container");
     for (let i = 0; i < data.length; i++) {
@@ -19,24 +17,23 @@ function displayComments(data) {
         let divUsername = document.createElement("div");
         divUsername.classList.add("username", "col-12")
         let btag = document.createElement("b");
-        btag.innerText = data[i].commented_by;
+        btag.innerText = data[i].fields.commented_by;
         divUsername.appendChild(btag);
         usernameCommentWrapper.appendChild(divUsername);
 
         let divComment = document.createElement("div");
         divComment.classList.add("comment-body", "col-12");
-        divComment.innerText = data[i].body;
+        divComment.innerText = data[i].fields.body;
         usernameCommentWrapper.appendChild(divComment);
 
         divCommentItem.appendChild(usernameCommentWrapper);
         commentsContainer.appendChild(divCommentItem);
     }
 }
-
+var startIndex = 0;
 async function getComments() {
-    pnum = pnum + 1;
-    const getCommentsURL ='/comments/get-comments/' + postID + '/' + pnum;
-
+    const getCommentsURL ='/comments/get-comments/' + postID + '/' + startIndex;
+    startIndex = startIndex + 4;
     const params = {
         method: 'GET',
         headers: {
@@ -45,20 +42,17 @@ async function getComments() {
         },
         credentials: 'same-origin',
     }
-    try {
-        const response = await fetch(getCommentsURL, params);
-        const data = await response.json();
-        const commentsData = data.commentsData
-        if (Object.keys(commentsData).length === 0){
-            loadCommentsbtn.style.display = "None"
-            document.querySelector(".comments-container").appendChild(document.createTextNode("No Other Comments Found"));
-        }else{
-            displayComments(commentsData);
-        }
-    } catch (error) {
-        console.log(error);
+    const response = await fetch(getCommentsURL, params);
+    const data = await response.json();
+    if (data.length != 0){
+        displayComments(data);
+    }
+    else{
+        loadCommentsbtn.style.display = "None"
+        document.querySelector(".comments-container").appendChild(document.createTextNode("No Other Comments Found"));
     }
 }
+
 getComments();
 loadCommentsbtn = document.getElementById("load-comments");
 loadCommentsbtn.addEventListener("click", getComments);
