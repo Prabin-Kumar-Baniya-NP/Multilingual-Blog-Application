@@ -86,8 +86,14 @@ body{
   font-size: 1.5rem;
 }
 /* Message */
-.message-box .messages{
-    padding: 5px;
+.message-box {
+    margin: 0;
+    padding: 0;
     color: #ffffff;
     background-color: #000000;
 }
+.message-box p{
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
