@@ -7,7 +7,9 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from category.models import Category
 from post.models import Post
+from django.core.serializers.json import Deserializer
 import json
+import io
 
 
 class TestCommentView(TestCase):
@@ -103,43 +105,24 @@ class TestCommentView(TestCase):
                 commented_by=comment["commented_by"],
             )
 
-    def test_get_comment_ajax_view_for_unauthenticated_user(self):
+    def test_get_comment_ajax_view(self):
         """
         Tests the get comment ajax view for unauthenticated user
         """
         response = self.c.get(reverse("comments:get-comments",
                                       kwargs={
                                           "postID": self.post11.id,
-                                          "pnum": 1
+                                          "startIndex": 0
                                       }),
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        json_data = json.loads(response.content)
-        json_comments_data = json_data["commentsData"]
+        comments_data = json.loads(response.content)
         comments_objects = Comment.objects.filter(
             post=self.post11.id).order_by("id").values("body",
                                                        "commented_by")[:4]
-        for i in range(4):
-            self.assertDictEqual(json_comments_data[i], comments_objects[i])
+        for i, obj in enumerate(comments_objects):
+            self.assertEqual(obj["body"], comments_data[i]["fields"]["body"])
+            self.assertEqual(obj["commented_by"], comments_data[i]["fields"]["commented_by"])
 
-    def test_get_comment_ajax_view_for_authenticated_user(self):
-        """
-        Tests the get comment ajax view for authenticated user
-        """
-        self.c.login(username="test_user11", password="abcde@12345")
-        response = self.c.get(reverse("comments:get-comments",
-                                      kwargs={
-                                          "postID": self.post11.id,
-                                          "pnum": 1
-                                      }),
-                              HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        json_data = json.loads(response.content)
-        json_comments_data = json_data["commentsData"]
-        comments_objects = Comment.objects.filter(
-            post=self.post11.id).order_by("id").exclude(
-                commented_by=self.user11.username).values(
-                    "body", "commented_by")[:4]
-        for i in range(2):
-            self.assertDictEqual(json_comments_data[i], comments_objects[i])
 
     def test_post_comment_ajax_view(self):
         """
