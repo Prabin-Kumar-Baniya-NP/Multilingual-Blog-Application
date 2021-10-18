@@ -57,5 +57,5 @@ class Post(models.Model):
             return str(int(datetime.datetime.now().timestamp() * pow(10, 6)))
         
         if not self.slug:
-            self.slug = slugify(str(self.title) + unique_code())
+            self.slug = slugify(str(self.title) + "-" + unique_code())
         return super().save(*args, **kwargs)
