@@ -22,12 +22,8 @@ from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
-    path("", include(("post.urls"), namespace="post")),
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
-    path("category/", include(('category.urls'), namespace = "category")),
-    path("comments/", include(("comment.urls"), namespace="comments")),
-    path("user/", include(("userAuth.urls"), namespace="user")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

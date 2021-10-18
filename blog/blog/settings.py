@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'category.apps.CategoryConfig',
     'comment.apps.CommentConfig',
     'userAuth.apps.UserauthConfig',
-    'ckeditor',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
