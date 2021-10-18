@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -12,7 +11,7 @@ class Category(models.Model):
         ('B', "Blocked"),
     ]
     name = models.CharField(_("Category Name"), max_length=24, unique=True)
-    description = RichTextField(_("Category Description"), max_length=500, null=True, blank=True)
+    description = models.TextField(_("Category Description"), max_length=500, null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True, verbose_name=_("Created On"))
     updated_on = models.DateTimeField(auto_now=True, verbose_name = _("Last Updated On"))
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name = _("Created By"))

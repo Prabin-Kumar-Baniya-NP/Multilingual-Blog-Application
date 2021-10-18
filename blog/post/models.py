@@ -2,7 +2,6 @@ from django.db import models
 from category.models import Category
 from django.contrib.auth.models import User
 from django.urls import reverse
-from ckeditor.fields import RichTextField
 import datetime
 from django.utils.text import slugify
 
@@ -25,7 +24,7 @@ class Post(models.Model):
                               blank=True,
                               default=None,
                               verbose_name="Post Image")
-    body = RichTextField("Post Description",
+    body = models.TextField("Post Description",
                             max_length=5000,
                             default="None")
     slug = models.SlugField("Slug Field", max_length=300, unique=True, null=True, blank=True)
