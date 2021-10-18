@@ -7,3 +7,8 @@ class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
         fields = "__all__"
+
+class CategorySerializerForPost(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ["id", "name"]
