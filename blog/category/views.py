@@ -3,11 +3,12 @@ from category.models import Category
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import PermissionDenied
 
 @api_view(["GET", "POST"])
 def get_create_category(request):
     if request.method == "GET":
-        categories = Category.objects.all()
+        categories = Category.objects.filter(status="A")
         serializer = CategorySerializer(categories, many = True)
         return Response(serializer.data)
     
@@ -31,6 +32,8 @@ def update_delete_category(request, pk):
     
     if request.method == "GET":
         serializer = CategorySerializer(category)
+        if serializer.data["status"] != 'A':
+            raise PermissionDenied(detail="Category is not Approved")
         return Response(serializer.data)
     
     elif request.method == "PUT":
