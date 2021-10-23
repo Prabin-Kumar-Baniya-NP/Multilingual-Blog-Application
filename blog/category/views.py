@@ -24,7 +24,7 @@ def get_create_category(request):
             return Response(status=status.HTTP_401_UNAUTHORIZED)
 
 @api_view(["GET","PUT", "DELETE"])
-def update_delete_category(request, pk):
+def get_update_delete_category(request, pk):
     try:
         category = Category.objects.get(id = pk)
     except Category.DoesNotExist:
