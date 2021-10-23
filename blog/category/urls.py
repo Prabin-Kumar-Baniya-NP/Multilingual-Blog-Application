@@ -9,4 +9,5 @@ app_name = "Category"
 urlpatterns = [
     path("", views.get_create_category, name="get-create-category"),
     path("<int:pk>/", views.update_delete_category, name="update-delete-category"),
+    path("author/<int:userID>/", views.author_category_list, name="author-category-detail"),
 ]

@@ -32,7 +32,7 @@ def update_delete_category(request, pk):
     
     if request.method == "GET":
         serializer = CategorySerializer(category)
-        if serializer.data["status"] != 'A':
+        if serializer.data["status"] != 'A' and serializer.data["created_by"] != request.user.id:
             raise PermissionDenied(detail="Category is not Approved")
         return Response(serializer.data)
     
@@ -59,3 +59,13 @@ def update_delete_category(request, pk):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(["GET"])
+def author_category_list(request, userID):
+    if request.user.id == userID:
+        categories = Category.objects.filter(created_by=userID)
+    else:
+        categories = Category.objects.filter(created_by=userID, status="A")
+    if request.method == "GET":
+        serializer = CategorySerializer(categories, many=True)
+        return Response(serializer.data)
