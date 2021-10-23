@@ -1,16 +1,21 @@
+from django.core import paginator
 from category.serializers import CategorySerializer
 from category.models import Category
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
+from rest_framework.pagination import PageNumberPagination
 
 @api_view(["GET", "POST"])
 def get_create_category(request):
     if request.method == "GET":
         categories = Category.objects.filter(status="A")
-        serializer = CategorySerializer(categories, many = True)
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        paginator.page_size = 10
+        result_page = paginator.paginate_queryset(categories, request)
+        serializer = CategorySerializer(result_page, many = True)
+        return paginator.get_paginated_response(serializer.data)
     
     elif request.method == "POST":
         if request.user.is_authenticated:
@@ -67,5 +72,8 @@ def author_category_list(request, userID):
     else:
         categories = Category.objects.filter(created_by=userID, status="A")
     if request.method == "GET":
-        serializer = CategorySerializer(categories, many=True)
-        return Response(serializer.data)
+        paginator = PageNumberPagination()
+        paginator.page_size = 10
+        result_page = paginator.paginate_queryset(categories, request)
+        serializer = CategorySerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
