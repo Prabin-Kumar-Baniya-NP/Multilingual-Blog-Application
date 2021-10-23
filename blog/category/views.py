@@ -6,10 +6,11 @@ from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.pagination import PageNumberPagination
 
+
 @api_view(["GET", "POST"])
 def get_create_category(request):
     if request.method == "GET":
-        categories = Category.objects.filter(status="A")
+        categories = Category.objects.filter(status="A").order_by("-created_on")
         paginator = PageNumberPagination()
         paginator.page_size = 10
         result_page = paginator.paginate_queryset(categories, request)
@@ -67,9 +68,9 @@ def get_update_delete_category(request, pk):
 @api_view(["GET"])
 def author_category_list(request, userID):
     if request.user.id == userID:
-        categories = Category.objects.filter(created_by=userID)
+        categories = Category.objects.filter(created_by=userID).order_by("-created_on")
     else:
-        categories = Category.objects.filter(created_by=userID, status="A")
+        categories = Category.objects.filter(created_by=userID, status="A").order_by("-created_on")
     if request.method == "GET":
         paginator = PageNumberPagination()
         paginator.page_size = 10
