@@ -1,4 +1,3 @@
-from django.core import paginator
 from category.serializers import CategorySerializer
 from category.models import Category
 from rest_framework.decorators import api_view
