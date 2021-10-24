@@ -20,11 +20,10 @@ class Post(models.Model):
                                  'max_length':
                                  "Title cann't be more than 126 characters",
                              })
-    image = models.ImageField(upload_to="postImages/",
-                              null=True,
-                              blank=True,
-                              default=None,
-                              verbose_name="Post Image")
+    image = models.URLField(null=True,
+                            blank=True,
+                            default=None,
+                            verbose_name="Post Image URL")
     body = models.TextField("Post Description",
                             max_length=5000,
                             default="None")
