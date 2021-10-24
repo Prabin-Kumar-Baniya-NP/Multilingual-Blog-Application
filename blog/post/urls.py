@@ -8,4 +8,7 @@ app_name = "post"
 router = SimpleRouter()
 router.register(r'', views.PostAPIViewSet)
 
-urlpatterns = router.urls
+urlpatterns = [
+    path("", include(router.urls)),
+    path("<int:postID>/comment/", views.get_comments_by_postID, name="get-comments-by-post")
+]

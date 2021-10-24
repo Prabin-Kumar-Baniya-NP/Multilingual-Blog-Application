@@ -4,7 +4,10 @@ from post.serializers import PostSerializer
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.exceptions import PermissionDenied, ValidationError
 from post.pagination import PostPagination
-
+from rest_framework.decorators import api_view
+from comment.models import Comment
+from comment.serializer import CommentSerializer
+from rest_framework.pagination import PageNumberPagination
 
 class PostAPIViewSet(ModelViewSet):
     """
@@ -49,3 +52,12 @@ class PostAPIViewSet(ModelViewSet):
         if instance.author.id != request.user.id:
             raise ValidationError({"error": "Only Author Can Delete this Post"})
         return super().destroy(request, *args, **kwargs)
+
+@api_view(["GET"])
+def get_comments_by_postID(request, postID):
+    posts = Comment.objects.filter(post = postID).order_by("-commented_on")
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
+    result_page = paginator.paginate_queryset(posts, request)
+    serializer = CommentSerializer(result_page, many = True)
+    return paginator.get_paginated_response(serializer.data)
