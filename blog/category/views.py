@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.pagination import PageNumberPagination
-
+from post.models import Post
+from post.serializers import PostSerializer
 
 @api_view(["GET", "POST"])
 def get_create_category(request):
@@ -64,3 +65,12 @@ def get_update_delete_category(request, pk):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
+
+@api_view(["GET"])
+def get_post_by_category(request, categoryID):
+    posts = Category.objects.get(id=categoryID).post_set.all().order_by("-published_on")
+    paginator = PageNumberPagination()
+    paginator.page_size = 10
+    result_page = paginator.paginate_queryset(posts, request)
+    serializer = PostSerializer(result_page, many = True)
+    return paginator.get_paginated_response(serializer.data)
