@@ -1,13 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from post import views
+from rest_framework.routers import SimpleRouter
 
 
-app_name = "Post"
+app_name = "post"
 
-urlpatterns = [
-    path("create-post/", views.PostCreateView.as_view(), name="create-post"),
-    path("get-post/", views.PostListView.as_view(), name="get-all-post"),
-    path("get-post/<int:pk>/", views.PostRetrieveView.as_view(), name="get-post-instance"),
-    path("update-post/<int:pk>/", views.PostUpdateView.as_view(), name="update-post"),
-    path("delete-post/<int:pk>/", views.PostDeleteView.as_view(), name="delete-post"),
-]
+router = SimpleRouter()
+router.register(r'', views.PostAPIViewSet)
+
+urlpatterns = router.urls

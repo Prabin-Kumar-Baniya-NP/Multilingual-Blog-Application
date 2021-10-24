@@ -15,6 +15,7 @@ class Post(models.Model):
     ]
     title = models.CharField("Post Title",
                              max_length=250,
+                             unique=True,
                              error_messages={
                                  'max_length':
                                  "Title cann't be more than 126 characters",

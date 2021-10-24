@@ -1,28 +1,51 @@
-from rest_framework import generics
+from rest_framework.response import Response
 from post.models import Post
 from post.serializers import PostSerializer
-from rest_framework.permissions import IsAuthenticated
-from post.permissions import AuthorOnly
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.exceptions import PermissionDenied, ValidationError
+from post.pagination import PostPagination
 
-class PostCreateView(generics.CreateAPIView):
+
+class PostAPIViewSet(ModelViewSet):
+    """
+    Viewsets for creating, updating, deleting, retrieving posts
+    """
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes =  [IsAuthenticated]
+    pagination_class = PostPagination
 
-class PostListView(generics.ListAPIView):
-    queryset = Post.objects.filter(status="A")
-    serializer_class = PostSerializer
 
-class PostRetrieveView(generics.RetrieveAPIView):
-    queryset = Post.objects.filter(status="A")
-    serializer_class = PostSerializer
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        queryset = queryset.filter(status="A").order_by("-published_on")
 
-class PostUpdateView(generics.UpdateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated, AuthorOnly]
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
 
-class PostDeleteView(generics.DestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes =  [IsAuthenticated, AuthorOnly]
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.status == "A":
+            serializer = self.get_serializer(instance)
+            return Response(serializer.data)
+        else:
+            raise PermissionDenied({"error": "This post is not approved"})
+    
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.author.id != request.user.id:
+            raise ValidationError({"error": "Only Author Can Update this Post"})
+        return super().update(request, *args, **kwargs)
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.author.id != request.user.id:
+            raise ValidationError({"error": "Only Author Can Delete this Post"})
+        return super().destroy(request, *args, **kwargs)
