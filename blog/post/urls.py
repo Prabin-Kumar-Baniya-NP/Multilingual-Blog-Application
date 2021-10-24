@@ -10,5 +10,5 @@ router.register(r'', views.PostAPIViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path("<int:postID>/comment/", views.get_comments_by_postID, name="get-comments-by-post")
+    path("<int:postID>/comments/", views.get_comments_by_postID, name="get-comments-by-post")
 ]

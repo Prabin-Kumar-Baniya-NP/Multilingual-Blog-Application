@@ -25,7 +25,7 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     path("category/", include("category.urls", namespace="category")),
-    path("post/", include("post.urls", namespace="post")),
+    path("posts/", include("post.urls", namespace="post")),
     path("comments/", include("comment.urls", namespace="comment"))
 ]
 
