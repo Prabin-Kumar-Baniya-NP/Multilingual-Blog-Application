@@ -64,16 +64,3 @@ def get_update_delete_category(request, pk):
                 return Response(status=status.HTTP_403_FORBIDDEN)
         else:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-
-@api_view(["GET"])
-def author_category_list(request, userID):
-    if request.user.id == userID:
-        categories = Category.objects.filter(created_by=userID).order_by("-created_on")
-    else:
-        categories = Category.objects.filter(created_by=userID, status="A").order_by("-created_on")
-    if request.method == "GET":
-        paginator = PageNumberPagination()
-        paginator.page_size = 10
-        result_page = paginator.paginate_queryset(categories, request)
-        serializer = CategorySerializer(result_page, many=True)
-        return paginator.get_paginated_response(serializer.data)
