@@ -68,7 +68,7 @@ def get_update_delete_category(request, pk):
 
 @api_view(["GET"])
 def get_post_by_category(request, categoryID):
-    posts = Category.objects.get(id=categoryID).post_set.all().order_by("-published_on")
+    posts = Post.objects.filter(category = categoryID, status="A").order_by("-published_on")
     paginator = PageNumberPagination()
     paginator.page_size = 10
     result_page = paginator.paginate_queryset(posts, request)
