@@ -12,7 +12,10 @@ class AuthorCategoryListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Category.objects.filter(created_by = self.kwargs["pk"])
+        if self.request.user.id == self.kwargs["pk"]:
+            return Category.objects.filter(created_by = self.kwargs["pk"])
+        else:
+            return Category.objects.filter(status="A", created_by = self.kwargs["pk"])
 
 class AuthorPostsListView(ListAPIView):
     serializer_class = PostSerializer
@@ -20,4 +23,7 @@ class AuthorPostsListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return Post.objects.filter(author=self.kwargs["pk"])
+        if self.request.user.id == self.kwargs["pk"]:
+            return Post.objects.filter(author=self.kwargs["pk"])
+        else:
+            return Post.objects.filter(status="A", author=self.kwargs["pk"])
