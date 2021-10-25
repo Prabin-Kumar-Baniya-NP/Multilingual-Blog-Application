@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'post.apps.PostConfig',
     'category.apps.CategoryConfig',
     'comment.apps.CommentConfig',
-    'userAuth.apps.UserauthConfig'
+    'userAuth.apps.UserauthConfig',
     'author.apps.AuthorConfig',
     'rest_framework',
 ]
