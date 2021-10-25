@@ -39,6 +39,8 @@ class PostAPIViewSet(ModelViewSet):
             raise PermissionDenied({"error": "This post is not approved"})
     
     def create(self, request, *args, **kwargs):
+        if request.data["author"] != self.request.user.id:
+            raise ValidationError({"error": "Author ID doesn't matches with your user id"})
         return super().create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
