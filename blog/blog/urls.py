@@ -28,6 +28,7 @@ urlpatterns = [
     path("posts/", include("post.urls", namespace="post")),
     path("comments/", include("comment.urls", namespace="comment")),
     path("author/", include("author.urls", namespace="author")),
+    path("auth/", include("userAuth.urls", namespace="userAuth")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
