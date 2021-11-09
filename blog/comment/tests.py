@@ -3,13 +3,14 @@ from json.encoder import JSONEncoder
 from comment.models import Comment
 from django.test import TestCase
 from django.test import Client
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 from category.models import Category
 from post.models import Post
 from django.core.serializers.json import Deserializer
 import json
-import io
+
+User = get_user_model()
 
 
 class TestCommentView(TestCase):

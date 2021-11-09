@@ -1,11 +1,12 @@
 from django.db import models
 from category.models import Category
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.urls import reverse
 import datetime
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 
-
+User = get_user_model()
 class Post(models.Model):
     POST_STATUS_CHOICES = [
         ('P', "Pending For Approval"),
@@ -13,7 +14,7 @@ class Post(models.Model):
         ('A', "Approved"),
         ('B', "Blocked"),
     ]
-    title = models.CharField("Post Title",
+    title = models.CharField(_("Post Title"),
                              max_length=250,
                              unique=True,
                              error_messages={
@@ -23,20 +24,20 @@ class Post(models.Model):
     image = models.URLField(null=True,
                             blank=True,
                             default=None,
-                            verbose_name="Post Image URL")
-    body = models.TextField("Post Description",
+                            verbose_name=_("Post Image URL"))
+    body = models.TextField(_("Post Description"),
                             max_length=5000,
                             default="None")
-    slug = models.SlugField("Slug Field", max_length=300, unique=True, null=True, blank=True)
-    published_on = models.DateTimeField("Publication Date", auto_now_add=True)
-    last_updated = models.DateTimeField("Last Updated", auto_now=True)
+    slug = models.SlugField(_("Slug Field"), max_length=300, unique=True, null=True, blank=True)
+    published_on = models.DateTimeField(_("Publication Date"), auto_now_add=True)
+    last_updated = models.DateTimeField(_("Last Updated"), auto_now=True)
     category = models.ManyToManyField(Category,
                                       blank=True,
                                       verbose_name="Category")
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
-                               verbose_name="Author Username")
-    status = models.CharField("Post Status",
+                               verbose_name=_("Author Username"))
+    status = models.CharField(_("Post Status"),
                               max_length=1,
                               choices=POST_STATUS_CHOICES,
                               default='P')
