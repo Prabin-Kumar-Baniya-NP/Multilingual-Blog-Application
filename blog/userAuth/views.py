@@ -9,6 +9,7 @@ from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 from django.contrib.auth.password_validation import validate_password
+from userAuth.permissions import HasObjectOwnership
 
 User = get_user_model()
 
@@ -33,15 +34,7 @@ class BlackListTokenView(APIView):
 class UpdateUserProfileView(UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UpdateUserProfileSerializer
-    permission_classes = [IsAuthenticated]
-
-    def update(self, request, *args, **kwargs):
-        if self.request.user.id != self.kwargs["pk"]:
-            raise ValidationError(
-                {"error": "You dont have permission to peform this action"})
-        return super().update(request, *args, **kwargs)
-
-
+    permission_classes = [IsAuthenticated, HasObjectOwnership]
 class ChangePasswordView(UpdateAPIView):
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated]
