@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from django.contrib.auth.password_validation import validate_password
 
 User = get_user_model()
 
@@ -43,5 +44,19 @@ class UpdateUserProfileView(UpdateAPIView):
 
 class ChangePasswordView(UpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = PasswordChangeSerializer
     permission_classes = [IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        serializer = PasswordChangeSerializer(data=request.data)
+        if serializer.is_valid():
+            if not self.request.user.check_password(serializer.data.get("old_password")):
+                raise ValidationError(
+                    self.error_messages['password_incorrect'],
+                    code='password_incorrect',
+                )
+            validate_password(serializer.data.get("new_password"))
+            self.request.user.set_password(serializer.data.get("new_password"))
+            self.request.user.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)

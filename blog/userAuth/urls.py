@@ -15,5 +15,5 @@ urlpatterns = [
     path("token/blacklist/", views.BlackListTokenView.as_view(), name="blacklist-token"),
     path("register/", views.RegisterUser.as_view(), name="register-user"),
     path("update-profile/<int:pk>/", views.UpdateUserProfileView.as_view(), name="update-profile"),
-    path("change-password/<int:pk/", views.ChangePasswordView.as_view(), name="change-password"),
+    path("change-password/", views.ChangePasswordView.as_view(), name="change-password"),
 ]
