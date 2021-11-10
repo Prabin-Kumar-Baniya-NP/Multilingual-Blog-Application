@@ -49,13 +49,13 @@ class ChangePasswordView(UpdateAPIView):
     def update(self, request, *args, **kwargs):
         serializer = PasswordChangeSerializer(data=request.data)
         if serializer.is_valid():
-            if not self.request.user.check_password(serializer.data.get("old_password")):
+            if not self.request.user.check_password(serializer.validated_data.get("old_password")):
                 raise ValidationError(
                     self.error_messages['password_incorrect'],
                     code='password_incorrect',
                 )
-            validate_password(serializer.data.get("new_password"))
-            self.request.user.set_password(serializer.data.get("new_password"))
+            validate_password(serializer.validated_data.get("new_password"))
+            self.request.user.set_password(serializer.validated_data.get("new_password"))
             self.request.user.save()
             return Response(status=status.HTTP_200_OK)
         else:
