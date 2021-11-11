@@ -57,6 +57,9 @@ class PostAPIViewSet(ModelViewSet):
 
 @api_view(["GET"])
 def get_comments_by_postID(request, postID):
+    """
+    Returns comments of post instance
+    """
     posts = Comment.objects.filter(post = postID).order_by("-commented_on")
     paginator = PageNumberPagination()
     paginator.page_size = 10

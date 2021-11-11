@@ -15,11 +15,17 @@ User = get_user_model()
 
 
 class RegisterUser(CreateAPIView):
+    """
+    Registers a new user
+    """
     permission_classes = [AllowAny]
     serializer_class = RegisterUserSerializer
 
 
 class BlackListTokenView(APIView):
+    """
+    Blacklists the token
+    """
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
@@ -32,10 +38,18 @@ class BlackListTokenView(APIView):
 
 
 class UpdateUserProfileView(UpdateAPIView):
+    """
+    Updates the User Profile
+    """
     queryset = User.objects.all()
     serializer_class = UpdateUserProfileSerializer
     permission_classes = [IsAuthenticated, HasObjectOwnership]
+
+
 class ChangePasswordView(UpdateAPIView):
+    """
+    Chaange the current password with new password
+    """
     queryset = User.objects.all()
     permission_classes = [IsAuthenticated]
 

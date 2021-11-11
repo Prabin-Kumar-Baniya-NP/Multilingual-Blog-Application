@@ -6,10 +6,16 @@ from comment.permissions import CommentModifyPermission
 from rest_framework.generics import CreateAPIView
 
 class CommentsCreateAPIView(CreateAPIView):
+    """
+    Adds a new comment to post
+    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
 class CommentsModifyAPIView(mixins.UpdateModelMixin, mixins.DestroyModelMixin, GenericAPIView):
+    """
+    Update, Delete comment instance
+    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [CommentModifyPermission]

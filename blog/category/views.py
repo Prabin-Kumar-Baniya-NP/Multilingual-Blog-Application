@@ -9,7 +9,11 @@ from post.models import Post
 from post.serializers import PostSerializer
 
 @api_view(["GET", "POST"])
-def get_create_category(request):
+def get_or_create_category(request):
+    """
+    Returns approved category
+    Adds a new category
+    """
     if request.method == "GET":
         categories = Category.objects.filter(status="A").order_by("-created_on")
         paginator = PageNumberPagination()
@@ -31,6 +35,11 @@ def get_create_category(request):
 
 @api_view(["GET","PUT", "DELETE"])
 def get_update_delete_category(request, pk):
+    """
+    GET: Returns instance of approved Category
+    PUT: Updates the category instance
+    Delete: Deletes the category instance
+    """
     try:
         category = Category.objects.get(id = pk)
     except Category.DoesNotExist:
@@ -68,6 +77,9 @@ def get_update_delete_category(request, pk):
 
 @api_view(["GET"])
 def get_post_by_category(request, categoryID):
+    """
+    Returns the posts based on category id
+    """
     posts = Post.objects.filter(category = categoryID, status="A").order_by("-published_on")
     paginator = PageNumberPagination()
     paginator.page_size = 10
